@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Ather Select</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Restricting the floating thumbnails so they NEVER overlap */
+    .floating-image {
+        width: 110px !important;
+        height: 70px !important;
+        object-fit: contain !important;
+        background: rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body class="select-model-page">
+
+  <header class="main-site-header" style="position: sticky; background: #000; border-bottom: 1px solid #111; z-index: 1000;">
+    <div class="navbar" style="padding: 15px 30px;">
+      <div class="brand" style="color: #fff; font-weight: 800; letter-spacing: 1.5px;">ATHER</div>
+      <nav class="nav-links" style="margin-right: auto; margin-left: 40px; gap: 35px;">
+        <a href="#home" class="nav-item">Home</a>
+        <a href="#rizta" class="nav-item">Rizta</a>
+        <a href="#450" class="nav-item">Ather 450</a>
+        <a href="#apex" class="nav-item">450 Apex</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HOME VIEW -->
+    <div id="homeView" class="hidden" style="background: #050505; min-height: 100vh; padding: 40px 20px; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      <div style="text-align: center; margin-bottom: 20px; z-index: 10;">
+        <h1 style="font-size: 3.5rem; font-weight: 900; margin-bottom: 10px; text-shadow: 0 0 20px rgba(255,255,255,0.2);">Discover the Lineup</h1>
+        <p style="color: #aaa; font-size: 1.1rem;">Select your ride. Built for the track, designed for the family.</p>
+      </div>
+      
+      <div class="home-slider-container">
+        <!-- Slides -->
+        <div class="home-slide active">
+          <img src="images/rizta-assets/White-Mono.webp" alt="Rizta S" onerror="this.src='https://placehold.co/800x600/111/FFF?text=Ather+Rizta+S'" />
+          <div class="slide-info neon-box">
+            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 5px;">Rizta S</h3>
+            <p style="color: #00d2ff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-size: 1rem;">Everyday Urban Comfort</p>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">Experience the perfect blend of comfort and utility with a spacious seat, large floorboard, and smart features tailored for everyday family commutes.</p>
+            <button class="neon-btn" onclick="window.location.hash='rizta-s'">EXPLORE RIZTA S</button>
+          </div>
+        </div>
+        <div class="home-slide">
+          <img src="images/rizta-assets/Rizta-Terracotta-Red-Duo-New.webp" alt="Rizta Z" onerror="this.src='https://placehold.co/800x600/111/FFF?text=Ather+Rizta+Z'" />
+          <div class="slide-info neon-box">
+            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 5px;">Rizta Z</h3>
+            <p style="color: #00d2ff; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-size: 1rem;">The Ultimate Family Upgrade</p>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">Elevate your family's ride with premium dual-tone finishes, an integrated pillion backrest, and advanced connected technology via the TFT dashboard.</p>
+            <button class="neon-btn" onclick="window.location.hash='rizta-z'">EXPLORE RIZTA Z</button>
+          </div>
+        </div>
+        <div class="home-slide">
+          <img src="images/450-assets/Ather-450-colours-Hyper-Sand.webp" alt="450X" onerror="this.src='https://placehold.co/800x600/111/00E296?text=Ather+450X'" />
+          <div class="slide-info neon-box">
+            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 5px;">450X</h3>
+            <p style="color: #00E296; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-size: 1rem;">The Street Smart Scooter</p>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">The definitive street-smart scooter, engineered for sharp handling, 3.3s acceleration, and cutting-edge digital connectivity via Google Maps and Magic Twist™.</p>
+            <button class="neon-btn" style="color: #00E296; border-color: #00E296;" onclick="window.location.hash='450x'">EXPLORE 450X</button>
+          </div>
+        </div>
+        <div class="home-slide">
+          <img src="images/450-assets/Ather-450-colours-Stealth-Blue.webp" alt="450S" onerror="this.src='https://placehold.co/800x600/78a88d/FFF?text=450S+Exterior'" />
+          <div class="slide-info neon-box">
+            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 5px;">450S</h3>
+            <p style="color: #00E296; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-size: 1rem;">Entry to Performance</p>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">Step into the world of Ather with unmatched reliability, a sleek deep-view display, and sporty performance that hits 90km/h.</p>
+            <button class="neon-btn" style="color: #00E296; border-color: #00E296;" onclick="window.location.hash='450s'">EXPLORE 450S</button>
+          </div>
+        </div>
+        <!-- APEX SLIDE - FIXED TO USE apex-model.jpeg WITH BLEND MODE -->
+        <div class="home-slide">
+          <img src="images/apex-assets/apex-model.jpeg" alt="450 Apex" style="mix-blend-mode: lighten; object-fit: contain;" onerror="this.src='https://placehold.co/800x600/1a202e/00E296?text=Ather+Apex'" />
+          <div class="slide-info neon-box">
+            <h3 style="font-size: 2.8rem; font-weight: 800; margin-bottom: 5px;">450 Apex</h3>
+            <p style="color: #00E296; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-size: 1rem;">The Pinnacle of Speed</p>
+            <p style="color: #ccc; margin-bottom: 30px; font-size: 1.05rem; line-height: 1.6;">Pushing the limits of electric performance with 100 km/h top speed, exclusive Warp+ mode, and exhilarating 0-40 km/h in 2.9s.</p>
+            <button class="neon-btn" style="color: #00E296; border-color: #00E296;" onclick="window.location.hash='apex'">EXPLORE APEX</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 450 PERFORMANCE VIEW -->
+    <div id="performanceView" class="hidden">
+      <!-- 450 NAVIGATION WITH CUSTOM SMOOTH SCROLL -->
+      <nav class="rizta-sub-navbar" style="display: flex; background: #050505; color: #fff; padding: 15px 40px; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; position: sticky; top: 70px; z-index: 99;">
+        <span id="perfModelTitle" style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">ATHER 450</span>
+        <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.85rem; color: #aaa; margin-left: auto;">
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-overview')">Overview</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-gallery')">Gallery</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-handling')">Performance</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-storage')">Battery</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-safety')">Safety</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-tech')">Connectivity</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-colour')">Colour</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-comparison')">Comparison</a>
+        </div>
+      </nav>
+
+      <section id="perf-overview" style="text-align: center; padding: 50px 20px 0; background: #050505; color: #fff;">
+        <div id="series450Toggle" class="series-toggle-container hidden" style="margin-bottom: 25px;">
+          <div class="series-toggle">
+            <button id="btn-toggle-450s" onclick="selectVariant('450s')">450<span class="s-highlight">S</span></button>
+            <button id="btn-toggle-450x" onclick="selectVariant('450x')">450<span class="x-highlight">X</span></button>
+            <button id="btn-toggle-apex" onclick="selectVariant('apex')">450<span style="color: #00d2ff; font-weight: 900; margin-left: 2px;">Apex</span></button>
+          </div>
+        </div>
+
+        <h1 id="perfHeroTitle" style="font-size: 4.5rem; font-weight: 900; margin-bottom: 10px; color: #fff;">Ather 450X</h1>
+        <p id="heroSubtitle" style="font-size: 1.5rem; font-weight: 500; color: #ccc; max-width: 900px; margin: 0 auto 10px; line-height: 1.4;">The Street Smart Scooter</p>
+        <p id="heroPrice" style="color: #00E296; font-weight: 700; font-size: 1.3rem; margin-bottom: 40px; letter-spacing: 1px;">Starts at ₹ 1.49 Lakh</p>
+
+        <!-- Dynamic Video Container -->
+        <div id="perf-video-section-wrapper" style="margin: 0 auto 60px;">
+          <div id="perf-video-container" class="rizta-video-container" style="max-width: 1200px; width: 100%; height: 75vh; min-height: 600px; margin: 0 auto; position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,226,150,0.1); background: transparent; border: 1px solid rgba(0, 226, 150, 0.2);">
+            <video id="perfVideo" style="width: 100%; height: 100%; object-fit: cover; display: block;" autoplay loop muted playsinline>
+            </video>
+          </div>
+        </div>
+      </section>
+
+      <section class="spec-strip" style="border-top: 1px solid #222; border-bottom: 1px solid #222; margin-top: 60px; position: relative; z-index: 10;">
+        <div class="spec-item"><h3 id="specAccel">--</h3><p>ACC (0 - 40 KMPH)</p></div>
+        <div class="spec-item"><h3 id="specSpeed">--</h3><p>TOP SPEED</p></div>
+        <div class="spec-item"><h3 id="specTorque">--</h3><p>MAX TORQUE</p></div>
+        <div class="spec-item"><h3 id="specRange">--</h3><p>CERTIFIED RANGE</p></div>
+      </section>
+
+      <!-- VEHICLE SMART TOUCHSCREEN SECTION -->
+      <section id="perf-smart-touchscreen" style="padding: 80px 20px; background: #050505; text-align: center;">
+        <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff; margin-bottom: 40px;">Vehicle Smart Touchscreen</h2>
+        <div class="dynamic-neon-card" style="max-width: 1000px; margin: 0 auto; border-radius: 16px; overflow: hidden; --dynamic-neon: #00E296; box-shadow: 0 20px 40px rgba(0, 226, 150, 0.1);">
+          <img id="dashboardImage" src="" alt="Smart Touchscreen" style="width: 100%; display: block; transition: opacity 0.3s ease;" />
+        </div>
+      </section>
+
+      <!-- DYNAMIC GALLERY SECTION -->
+      <div id="perf-gallery" style="padding: 80px 20px; background: #0a0a0a; text-align: center;">
+        <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff; margin-bottom: 40px;">Gallery</h2>
+        <div class="gallery-slider-container dynamic-neon-card" style="max-width: 1000px; height: 500px; margin: 0 auto; position: relative; border-radius: 16px; overflow: hidden; --dynamic-neon: #00E296;" id="perfGallerySlider">
+          <!-- Dynamic images injected here via JS -->
+        </div>
+      </div>
+
+      <section class="feature-section section-wrapper" id="perf-handling" style="background: #050505; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Warp Speed Performance</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">Engineered with an all-aluminum frame, flawless chassis weight balance, and track-tuned handling dynamics.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Precision Aluminium Frame</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">A 100% aircraft-grade die-cast aluminium chassis optimizes structural rigidity for swift, stable high-speed maneuvers.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Perfect 50:50 Balance</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Zero lateral motor offset delivers symmetrical centering. Lean into extreme corners with absolute stability.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Symmetrical Monoshock</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Progressive rear monoshock provides unparalleled damping feedback from urban asphalt to closed tracks.</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="explore-section section-wrapper" id="perf-storage" style="background: #0a0a0a; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Advanced IP67 Powertrain</h2>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 40px; border-radius: 16px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 15px;">22L Functional Boot</h3>
+                  <p style="font-size: 1.1rem; color: #aaa; line-height: 1.6;">Spacious under-seat safe holds full-sized gear, while the perfectly lower-mounted battery profile maintains a sportier low center of gravity.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 40px; border-radius: 16px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 15px;">Ather Grid™ Fast Charging</h3>
+                  <p style="font-size: 1.1rem; color: #aaa; line-height: 1.6;">Plug in safely across the massive public fast-charging ecosystem to juice up your ride instantly at high-velocity rates.</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="feature-section section-wrapper" id="perf-safety" style="background: #050505; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Proactive Protection Framework</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">High-tier sensors integrated inside to maintain hyper-control over multi-terrain environments.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">SkidControl™ Suite</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Intelligent dynamic traction system counters sand or slick water paths effortlessly, balancing immediate wheel slippage.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">FallSafe™ Sensor</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Instantly cuts active high-voltage energy parameters to the motor array if unexpected tilt thresholds occur.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Emergency ESS Signal</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Rear tail-lights execute high-frequency bursts upon intense deceleration to alert following commuter arrays.</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="feature-section section-wrapper" id="perf-tech" style="background: #0a0a0a; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Next-Gen Connected Intelligence</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">A centralized ecosystem bridging high-performance mechanical parts with instant software layers.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Magic Twist™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Regenerative control directly through throttle reverse modulation. Retard speed completely without traditional friction pads.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">AutoHold™ Stability</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Halts flawlessly right upon steep gradients automatically. Keeps position steady without active brake application inputs.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">7" Touchscreen</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Pinch, zoom, swipe. Integrated with Google Maps for navigation and WhatsApp to preview messages.</p>
+              </div>
+          </div>
+      </section>
+
+      <!-- 450/APEX COLOUR CONFIGURATOR -->
+      <section id="perf-colour" style="padding: 100px 20px; text-align: center; background-color: #050505; color: #fff; transition: background-color 0.4s ease;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+          
+          <div style="align-self: flex-start; text-align: left; margin-bottom: 40px; margin-left: 10%;">
+            <h2 style="font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px; color: #00E296;">Signature Aesthetics</h2>
+            <p style="font-size: 1.1rem; color: #aaa; max-width: 350px;">Choose a high-gloss signature racing profile.</p>
+          </div>
+
+          <div style="width: 100%; max-width: 1000px; height: 550px; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; position: relative;" id="perfConfigWrapper">
+            
+            <div id="perfColorBanner" style="position: absolute; top: 15%; left: 5%; right: 5%; bottom: 15%; border-radius: 100px; background: #111; z-index: 1; transition: background 0.4s ease;"></div>
+            
+            <h2 id="perfBannerText" style="position: absolute; left: 8%; z-index: 20; font-size: 2.2rem; font-weight: 900; color: #fff; max-width: 250px; line-height: 1.2; text-align: left; pointer-events: none; text-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: opacity 0.3s ease, transform 0.3s ease;">Hyper Sand</h2>
+
+            <div id="perfLeftFloatingImages" class="floating-images-container left hidden-floating"></div>
+            
+            <img id="perfConfigImage" src="" onerror="this.src='https://placehold.co/800x600/111/00E296?text=Ather+450+Colour'" alt="450 Configurator Asset" style="width: 100%; max-width: 600px; height: 100%; max-height: 450px; object-fit: contain; z-index: 10; position: relative; transition: all 0.4s ease; cursor: pointer;" />
+            
+            <div id="perfRightFloatingImages" class="floating-images-container right hidden-floating"></div>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 50px; margin-top: 20px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="perfSeriesPills" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: 400px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #fff;">Performance Series</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="perfApexPills" style="display: flex; gap: 12px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #00E296;">Apex Exclusive</span>
+            </div>
+          </div>
+
+          <div id="perf-comparison" class="comparison-box dynamic-neon-card" style="margin-top: 100px; width: 100%; max-width: 900px; padding: 40px; border-radius: 20px; --dynamic-neon: #00E296;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 30px; text-align: center; color: #fff;">The Performance Lineup</h2>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 1.1rem; color: #eee;">
+                <thead>
+                  <tr style="border-bottom: 2px solid rgba(0, 226, 150, 0.4);">
+                    <th style="padding: 15px; font-weight: 700; color: #aaa;">Features</th>
+                    <th style="padding: 15px; font-weight: 800; color: #fff;">450S</th>
+                    <th style="padding: 15px; font-weight: 800; color: #00E296;">450X</th>
+                    <th style="padding: 15px; font-weight: 800; color: #00d2ff;">450 Apex</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Acceleration (0-40)</td>
+                    <td style="padding: 15px;">3.9 Seconds</td>
+                    <td style="padding: 15px;">3.3 Seconds</td>
+                    <td style="padding: 15px;">2.9 Seconds</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Top Speed</td>
+                    <td style="padding: 15px;">90 km/h</td>
+                    <td style="padding: 15px;">90 km/h</td>
+                    <td style="padding: 15px;">100 km/h</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Peak Power</td>
+                    <td style="padding: 15px;">5.4 kW</td>
+                    <td style="padding: 15px;">6.4 kW</td>
+                    <td style="padding: 15px;">7.0 kW</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Battery Options</td>
+                    <td style="padding: 15px;">2.9 kWh</td>
+                    <td style="padding: 15px;">2.9 kWh | 3.7 kWh</td>
+                    <td style="padding: 15px;">3.7 kWh</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Dashboard</td>
+                    <td style="padding: 15px;">DeepView™ Display</td>
+                    <td style="padding: 15px;">7" TFT Touchscreen</td>
+                    <td style="padding: 15px;">7" TFT Touchscreen</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Ride Modes</td>
+                    <td style="padding: 15px;">4 Modes</td>
+                    <td style="padding: 15px;">5 Modes (inc. Warp)</td>
+                    <td style="padding: 15px;">5 Modes (inc. Warp+)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Magic Twist™</td>
+                    <td style="padding: 15px;">No</td>
+                    <td style="padding: 15px;">Yes</td>
+                    <td style="padding: 15px;">Standard</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px; font-weight: 600;">Panel Styling</td>
+                    <td style="padding: 15px;">Opaque Solid</td>
+                    <td style="padding: 15px;">Opaque Solid</td>
+                    <td style="padding: 15px;">Transparent Side Panels</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- RIZTA VIEW -->
+    <div id="riztaView" class="hidden">
+      <!-- RIZTA NAVIGATION WITH CUSTOM SMOOTH SCROLL -->
+      <nav class="rizta-sub-navbar" style="display: flex; background: #050505; color: #fff; padding: 15px 40px; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; position: sticky; top: 70px; z-index: 99;">
+        <span style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">ATHER RIZTA</span>
+        <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.85rem; color: #aaa; margin-left: auto;">
+          <a href="javascript:void(0)" onclick="smoothScrollTo('overview')">Overview</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('gallery')">Gallery</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('comfort')">Comfort</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('storage')">Storage</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('safety')">Safety</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('connectivity')">Connectivity</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('colour')">Colour</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('comparison')">Comparison</a>
+        </div>
+      </nav>
+
+      <section id="overview" style="text-align: center; padding: 50px 20px 0; background: #050505; color: #fff;">
+        <div id="seriesRiztaToggle" class="series-toggle-container hidden" style="margin-bottom: 25px;">
+          <div class="series-toggle">
+            <button id="btn-toggle-rizta-s" onclick="selectVariant('rizta-s')">Rizta<span style="color: #00d2ff; font-weight: 900; margin-left: 4px;">S</span></button>
+            <button id="btn-toggle-rizta-z" onclick="selectVariant('rizta-z')">Rizta<span style="color: #FF4500; font-weight: 900; margin-left: 4px;">Z</span></button>
+          </div>
+        </div>
+
+        <h1 id="riztaHeroTitle" style="font-size: 4.5rem; font-weight: 900; margin-bottom: 10px; color: #fff;">Meet Rizta</h1>
+        <p id="riztaHeroSubtitle" style="font-size: 1.5rem; font-weight: 500; color: #ccc; max-width: 900px; margin: 0 auto 10px; line-height: 1.4;">Everyday Urban Comfort</p>
+        <p id="riztaHeroPrice" style="color: #00d2ff; font-weight: 700; font-size: 1.3rem; margin-bottom: 40px; letter-spacing: 1px;">Starts at ₹ 1.12 Lakh</p>
+        
+        <div id="rizta-video-section" class="rizta-video-container" style="max-width: 1000px; margin: 0 auto 60px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,210,255,0.1); background: #000; border: 1px solid rgba(0, 210, 255, 0.2);">
+          <video style="width: 100%; height: auto; display: block;" autoplay loop muted playsinline>
+            <source src="images/rizta-assets/rizta-home-video.mp4" type="video/mp4">
+          </video>
+        </div>
+      </section>
+
+      <!-- DYNAMIC RIZTA SPECS -->
+      <section class="spec-strip" style="border-top: 1px solid #222; border-bottom: 1px solid #222; margin-top: 60px; position: relative; z-index: 10;">
+        <div class="spec-item"><h3 id="riztaSpecAccel">--</h3><p>ACC (0 - 40 KMPH)</p></div>
+        <div class="spec-item"><h3 id="riztaSpecSpeed">--</h3><p>TOP SPEED</p></div>
+        <div class="spec-item"><h3 id="riztaSpecTorque">--</h3><p>MAX TORQUE</p></div>
+        <div class="spec-item"><h3 id="riztaSpecRange">--</h3><p>CERTIFIED RANGE</p></div>
+      </section>
+
+      <div id="gallery" style="padding: 80px 20px; background: #0a0a0a; text-align: center;">
+        <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff; margin-bottom: 40px;">Gallery</h2>
+        <div class="gallery-slider-container neon-card" style="max-width: 1000px; height: 500px; margin: 0 auto; position: relative; border-radius: 16px; overflow: hidden;" id="riztaGallerySlider">
+          <img src="images/rizta-assets/Ather-Rizta-Electric-Scooter-Headlight.webp" onerror="this.onerror=null; this.src='https://placehold.co/1000x500/111/FFF?text=Rizta+Headlight'" class="gallery-slide active" alt="Gallery 1" />
+          <img src="images/rizta-assets/father-scooty.webp" onerror="this.onerror=null; this.src='https://placehold.co/1000x500/111/FFF?text=Father+Scooty'" class="gallery-slide" alt="Gallery 2" />
+          <img src="images/rizta-assets/vegetable20scene-desk-updated.webp" onerror="this.onerror=null; this.src='https://placehold.co/1000x500/111/FFF?text=Vegetable+Scene'" class="gallery-slide" alt="Gallery 3" />
+          <img src="images/rizta-assets/Rizta-Terracotta-Mono-Duo.webp" onerror="this.onerror=null; this.src='https://placehold.co/1000x500/111/FFF?text=Rizta+Terracotta'" class="gallery-slide" alt="Gallery 4" />
+        </div>
+      </div>
+
+      <section class="feature-section section-wrapper" id="comfort" style="background: #050505; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Room for everyone</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">In size, yes. And much much bigger on comfort and ease of riding.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Long Seat</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">From the smallest to the tallest, there's space for all in the family.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Wide Pillion Backrest</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Pillions, this one's for you. We've got your back. Just sit back and enjoy your ride.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Spacious Floorboard</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">No more squeezing your legs in. Tall or small, there's enough room.</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="explore-section section-wrapper" id="storage" style="background: #0a0a0a; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Carry all your big little things</h2>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; max-width: 1000px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 40px; border-radius: 16px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 15px;">56L Total Storage</h3>
+                  <p style="font-size: 1.1rem; color: #aaa; line-height: 1.6;">Carry all your big little things. There's plenty of space with a premium 34L under-seat boot and an optional 22L front Frunk.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 40px; border-radius: 16px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 15px;">Multi-Purpose Charger</h3>
+                  <p style="font-size: 1.1rem; color: #aaa; line-height: 1.6;">Fast charge your phone and other devices like tyre inflators, earphones, smartwatches, speakers and more on the go.</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="feature-section section-wrapper" id="safety" style="background: #050505; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Safety for all</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">Rest assured, take on every road. You and your ride will be safe and sound.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">SkidControl™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Glide through wet, sandy or bumpy roads without any worries. Smart real-time traction helps you always stay in control.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">FallSafe™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">In case of falls, the motor is automatically cut off to prevent accidental acceleration while getting up.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Emergency Stop Signal</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Tail lights flash dynamically on sudden braking maneuvers, alerting riders behind you.</p>
+              </div>
+          </div>
+      </section>
+
+      <section class="feature-section section-wrapper" id="connectivity" style="background: #0a0a0a; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Makes every ride magical</h2>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Magic Twist™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">One throttle does it all. Speed up or slow down using the exact same throttle. A new twist to braking.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">AutoHold™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Halt and hold steady on slopes automatically without brakes.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00d2ff;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">7" Touchscreen</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Pinch, zoom, swipe. Integrated with Google Maps for navigation and WhatsApp to preview messages.</p>
+              </div>
+          </div>
+      </section>
+
+      <!-- RIZTA COLOUR CONFIGURATOR -->
+      <section id="colour" style="padding: 100px 20px; text-align: center; background-color: #050505; color: #fff; transition: background-color 0.4s ease;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+          
+          <div style="align-self: flex-start; text-align: left; margin-bottom: 20px; margin-left: 10%;">
+            <h2 id="riztaActiveColorName" style="font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px; color: #00d2ff;">Signature Colours</h2>
+            <p style="font-size: 1.1rem; color: #aaa; max-width: 350px;">Choose a finish that fits your family's style.</p>
+          </div>
+
+          <!-- THE INTERACTIVE BOOM WRAPPER WITH BACKGROUND BANNER -->
+          <div style="width: 100%; max-width: 1000px; height: 550px; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; position: relative;" id="riztaConfigWrapper">
+            
+            <div id="riztaColorBanner" style="position: absolute; top: 15%; left: 5%; right: 5%; bottom: 15%; border-radius: 100px; background: #4A1514; z-index: 1; transition: background 0.4s ease;"></div>
+            
+            <!-- ADJUSTED TEXT OVERLAP -->
+            <h2 id="riztaBannerText" style="position: absolute; left: 8%; z-index: 20; font-size: 2.2rem; font-weight: 900; color: #fff; max-width: 250px; line-height: 1.2; text-align: left; pointer-events: none; text-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: opacity 0.2s ease, transform 0.2s ease;">Terracotta Red Duo</h2>
+
+            <div id="leftFloatingImages" class="floating-images-container left hidden-floating"></div>
+            
+            <img id="riztaConfigImage" src="" onerror="this.src='https://placehold.co/800x600/111/FFF?text=Rizta+Colour'" alt="Rizta Configurator Asset" style="width: 100%; max-width: 600px; height: 100%; max-height: 450px; object-fit: contain; z-index: 10; position: relative; transition: all 0.4s ease; cursor: pointer;" />
+            
+            <div id="rightFloatingImages" class="floating-images-container right hidden-floating"></div>
+          </div>
+
+          <!-- GROUPED COLOR PILLS -->
+          <div style="display: flex; justify-content: center; gap: 50px; margin-top: 20px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="mattePills" style="display: flex; gap: 12px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #fff;">Super Matte</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="duoPills" style="display: flex; gap: 12px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #fff;">Duo</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="monoPills" style="display: flex; gap: 12px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #fff;">Mono</span>
+            </div>
+          </div>
+
+          <div id="comparison" class="comparison-box dynamic-neon-card" style="margin-top: 100px; width: 100%; max-width: 900px; padding: 40px; border-radius: 20px;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 30px; text-align: center; color: #fff;">Rizta S vs Rizta Z</h2>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 1.1rem; color: #eee;">
+                <thead>
+                  <tr style="border-bottom: 2px solid rgba(255, 255, 255, 0.2);">
+                    <th style="padding: 15px; font-weight: 700; color: #aaa;">Features</th>
+                    <th style="padding: 15px; font-weight: 800; color: #fff;">Rizta S</th>
+                    <th style="padding: 15px; font-weight: 800; color: #00d2ff;">Rizta Z</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);"><td style="padding: 15px; font-weight: 600;">Dashboard</td><td style="padding: 15px;">DeepView™ Display</td><td style="padding: 15px;">7" TFT Touchscreen</td></tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);"><td style="padding: 15px; font-weight: 600;">Battery Options</td><td style="padding: 15px;">2.9 kWh</td><td style="padding: 15px;">2.9 kWh | 3.7 kWh</td></tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);"><td style="padding: 15px; font-weight: 600;">IDC Range</td><td style="padding: 15px;">123 km</td><td style="padding: 15px;">123 km | 159 km</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="background: #000; border-top: 1px solid #222; padding: 30px;">
+    <div class="footer-bottom">&copy; 2026 Ather Energy Select Experience Portal.</div>
+  </footer>
+
+  <script src="models.js"></script>
+</body>
+</html>

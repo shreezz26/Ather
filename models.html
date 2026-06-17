@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Ather Select | Performance Showcase</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* --- CSS for the 450S / 450X Pill Toggle Switch --- */
+    .model-toggle-wrapper {
+        background: #ffffff;
+        border-radius: 40px;
+        padding: 6px;
+        /* display is now handled strictly by JS */
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px auto;
+        z-index: 999; /* Boosted z-index to ensure it sits on top */
+        position: relative;
+        width: fit-content;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .model-toggle-btn {
+        padding: 10px 35px;
+        border-radius: 30px;
+        font-weight: 800;
+        font-size: 1.2rem;
+        color: #000000; 
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+    }
+    .model-toggle-btn:hover {
+        background: rgba(0,0,0,0.05);
+    }
+    .model-toggle-btn.active {
+        background: #111111; 
+        color: #ffffff; 
+    }
+    .model-toggle-btn.active:hover {
+        background: #111111;
+    }
+  </style>
+</head>
+<body class="select-model-page">
+
+  <header class="dark-header">
+    <div class="navbar">
+      <div class="brand" style="color: #fff; cursor: pointer;" onclick="openModelSelector()">ATHER <span style="font-weight: 300; margin-left: 8px;">SELECT</span></div>
+      <nav class="nav-links">
+        <span class="nav-item light-nav" onclick="openModelSelector()" style="cursor: pointer; margin-right: 15px;">🏍️ Change Model</span>
+        <span id="authStatusText" class="nav-item light-nav auth-trigger" onclick="openAuthModal()">Login / Register</span>
+        <a href="index.html" class="nav-item light-nav">&larr; Return Home</a>
+      </nav>
+    </div>
+  </header>
+
+  <aside class="floating-action-menu">
+    <a href="#" class="float-btn" onclick="initiateVehicleBooking()"><span id="ebookBtnText">E-BOOK ATHER</span> &nearr;</a>
+    <a href="#" class="float-btn" onclick="alert('Our team will contact you shortly.')"><span>REQUEST CALLBACK</span> &nearr;</a>
+  </aside>
+
+  <main>
+    <div id="performanceView" class="hidden">
+      <nav class="rizta-sub-navbar" style="display: flex; background: #050505; color: #fff; padding: 15px 40px; justify-content: space-between; align-items: center; border-bottom: 1px solid #111;">
+        <span id="perfModelTitle" style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">ATHER 450</span>
+        <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.85rem; color: #aaa; margin-left: auto;">
+          <a href="javascript:void(0)" onclick="document.getElementById('perf-overview').scrollIntoView({behavior: 'smooth', block: 'start'})">Overview</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('perf-handling').scrollIntoView({behavior: 'smooth', block: 'start'})">Handling</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('perf-tech').scrollIntoView({behavior: 'smooth', block: 'start'})">Tech</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('perf-colour').scrollIntoView({behavior: 'smooth', block: 'start'})">Colour</a>
+          <a href="javascript:void(0)" onclick="document.getElementById('perf-comparison').scrollIntoView({behavior: 'smooth', block: 'start'})" style="color:#fff; border-bottom: 2px solid #00E296; padding-bottom:4px;">Comparison</a>
+        </div>
+      </nav>
+
+      <section class="select-hero" id="perf-overview" style="background: radial-gradient(circle at center, #111 0%, #000 100%); padding-top: 50px;">
+        <div class="hero-text-container" style="top: 10%; width: 100%; display: flex; flex-direction: column; align-items: center;">
+          
+          <!-- HARDCODED MODEL TOGGLE - Hidden by inline CSS initially -->
+          <div id="modelToggleContainer" class="model-toggle-wrapper" style="display: none;">
+            <div id="btn-toggle-450s" class="model-toggle-btn" onclick="selectVariant('450s')">
+                450<span style="color: #FFD700; font-weight: 900; margin-left: 2px;">S</span>
+            </div>
+            <div id="btn-toggle-450x" class="model-toggle-btn" onclick="selectVariant('450x')">
+                450<span style="color: #FF0000; font-weight: 900; margin-left: 2px;">X</span>
+            </div>
+          </div>
+
+          <h2 id="heroSubtitle" class="hero-subtitle-large" style="color: #fff; text-transform: uppercase;">Not Designed For Subtlety</h2>
+          <p id="heroPrice" class="hero-price" style="color: #00E296; font-weight: 700; font-size: 1.3rem;">Loading Configuration...</p>
+        </div>
+        <div class="model-3d-container" id="model3dContainer" style="margin-top: 170px;">
+          <img id="heroImage" src="https://placehold.co/800x600/111/00E296?text=Ather+450" alt="Ather Performance Vehicle" class="select-hero-img" />
+        </div>
+      </section>
+
+      <section class="spec-strip" style="border-top: 1px solid #222; border-bottom: 1px solid #222;">
+        <div class="spec-item"><h3 id="specAccel">--</h3><p>ACC (0 - 40 KMPH)</p></div>
+        <div class="spec-item"><h3 id="specSpeed">--</h3><p>TOP SPEED</p></div>
+        <div class="spec-item"><h3 id="specTorque">--</h3><p>MAX TORQUE</p></div>
+        <div class="spec-item"><h3 id="specRange">--</h3><p>CERTIFIED RANGE</p></div>
+      </section>
+
+      <!-- Sections Truncated for Brevity - Keep your existing Handling, Tech, and Colour sections here -->
+
+    </div>
+  </main>
+
+  <script src="models.js"></script>
+</body>
+</html>

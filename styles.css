@@ -1,0 +1,629 @@
+/* --- COMPREHENSIVE STRUCTURAL DESIGN SYSTEM --- */
+:root {
+  --primary: #ffffff;
+  --secondary: #222222;
+  --accent: #00E296; 
+  --bg-light: #050505;
+  --text-dark: #ffffff;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 150px; 
+}
+
+body { 
+  background-color: var(--bg-light); 
+  color: var(--text-dark); 
+  line-height: 1.6; 
+  overflow-x: hidden; 
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+  transition: background-color 0.3s ease; 
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+button { 
+  cursor: pointer; 
+  font-family: inherit; 
+  outline: none; 
+}
+
+.hidden { 
+  display: none !important; 
+}
+
+/* --- NAVIGATION HEADER --- */
+.main-site-header { 
+  position: absolute; 
+  width: 100%; 
+  z-index: 100; 
+  top: 0; 
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%); 
+}
+
+.navbar { 
+  max-width: 1400px; 
+  margin: 0 auto; 
+  padding: 25px 30px; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+}
+
+.brand { 
+  font-size: 1.8rem; 
+  font-weight: 900; 
+  color: #fff; 
+  letter-spacing: 2px; 
+}
+
+.nav-links { 
+  display: flex; 
+  gap: 30px; 
+  align-items: center; 
+}
+
+.nav-item { 
+  font-size: 0.95rem; 
+  font-weight: 600; 
+  color: #ddd; 
+  transition: color 0.3s; 
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+}
+
+.nav-item:hover { 
+  color: var(--accent); 
+}
+
+/* =========================================================
+   SIDE-BY-SIDE HOME SLIDER & ATTRACTIVE NEON
+   ========================================================= */
+
+.home-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  flex-direction: row; 
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  pointer-events: none; 
+}
+
+.home-slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.home-slide img {
+  width: 500px;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+  transition: transform 1s ease;
+}
+
+.home-slide.active img {
+  animation: floatScooter 5s infinite ease-in-out;
+}
+
+@keyframes floatScooter {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.neon-box {
+  padding: 40px;
+  border: 1px solid rgba(0, 210, 255, 0.4); 
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.15), inset 0 0 10px rgba(0, 210, 255, 0.1);
+  border-radius: 20px;
+  background: rgba(10, 15, 20, 0.7);
+  backdrop-filter: blur(10px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
+  text-align: left;
+  width: 450px;
+}
+
+.neon-box:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 210, 255, 0.7);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.3), inset 0 0 15px rgba(0, 210, 255, 0.2);
+}
+
+.neon-btn {
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 15px rgba(0, 226, 150, 0.3), inset 0 0 10px rgba(0, 226, 150, 0.1);
+  text-shadow: 0 0 8px rgba(0, 226, 150, 0.6);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.neon-btn:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 25px rgba(0, 226, 150, 0.6);
+  text-shadow: none;
+}
+
+/* --- NEW UNIFIED NEON CARD STYLING --- */
+.neon-card {
+  border: 1px solid rgba(0, 210, 255, 0.4) !important;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.15), inset 0 0 10px rgba(0, 210, 255, 0.1) !important;
+  background: rgba(10, 15, 20, 0.7) !important;
+  backdrop-filter: blur(10px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
+}
+
+.neon-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 210, 255, 0.8) !important;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.4), inset 0 0 15px rgba(0, 210, 255, 0.2) !important;
+}
+
+/* --- DYNAMIC NEON CARD STYLING --- */
+.dynamic-neon-card {
+  border: 1px solid var(--dynamic-neon, rgba(0, 210, 255, 0.4)) !important;
+  box-shadow: 0 0 15px var(--dynamic-neon, rgba(0, 210, 255, 0.15)), inset 0 0 10px var(--dynamic-neon, rgba(0, 210, 255, 0.1)) !important;
+  background: rgba(10, 15, 20, 0.7) !important;
+  backdrop-filter: blur(10px);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s;
+}
+
+.dynamic-neon-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--dynamic-neon, rgba(0, 210, 255, 0.8)) !important;
+  box-shadow: 0 0 25px var(--dynamic-neon, rgba(0, 210, 255, 0.4)), inset 0 0 15px var(--dynamic-neon, rgba(0, 210, 255, 0.2)) !important;
+}
+
+/* =========================================================
+   ATHER SELECT (STANDARD/PERFORMANCE VIEW)
+   ========================================================= */
+.select-hero { 
+  position: relative; 
+  width: 100%; 
+  height: 100vh; 
+  min-height: 650px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%); 
+  overflow: hidden; 
+}
+
+/* --- SERIES 450 TOGGLE --- */
+.series-toggle-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.series-toggle {
+  background: #ffffff;
+  border-radius: 40px;
+  display: inline-flex;
+  padding: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.series-toggle button {
+  background: transparent;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 40px;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+}
+
+.series-toggle button.active {
+  background: #111111;
+  color: #ffffff;
+}
+
+.series-toggle button span {
+  margin-left: 2px;
+}
+
+.s-highlight { color: #f7d002; }
+.x-highlight { color: #e52b20; }
+
+
+.hero-text-container { 
+  position: absolute; 
+  top: 15%; 
+  text-align: center; 
+  z-index: 2; 
+}
+
+.hero-subtitle-large { 
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem); 
+  font-weight: 800; 
+  letter-spacing: -1px; 
+}
+
+.hero-price { 
+  font-size: 1.1rem; 
+  color: #aaaaaa; 
+  letter-spacing: 2px; 
+  margin-top: 5px; 
+}
+
+.model-3d-container { 
+  width: 85%; 
+  height: 55vh; 
+  margin-top: 80px; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  position: relative; 
+  z-index: 1; 
+  perspective: 1000px; 
+}
+
+.select-hero-img { 
+  max-width: 85%; 
+  max-height: 85%; 
+  object-fit: contain; 
+  filter: drop-shadow(0 40px 50px rgba(0,0,0,0.85)); 
+  transition: transform 0.1s ease-out; 
+}
+
+.spec-strip { 
+  display: grid; 
+  grid-template-columns: repeat(4, 1fr); 
+  background: #000; 
+  border-top: 1px solid #222; 
+  border-bottom: 1px solid #222; 
+  padding: 45px 0; 
+}
+
+.spec-item { 
+  text-align: center; 
+  border-right: 1px solid #222; 
+}
+
+.spec-item:last-child { 
+  border-right: none; 
+}
+
+.spec-item h3 { 
+  font-size: 2.8rem; 
+  font-weight: 800; 
+  color: #fff; 
+}
+
+.spec-item p { 
+  font-size: 0.85rem; 
+  color: #888; 
+  letter-spacing: 2px; 
+}
+
+/* Performance View Overrides */
+#performanceView .spec-strip {
+  background: #000;
+}
+
+#performanceView .spec-item h3 {
+  color: #00E296; 
+}
+
+#performanceView .color-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#performanceView .color-pill.active {
+  transform: scale(1.2);
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3), 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+#perfConfigImage {
+  transition: transform 0.4s ease, opacity 0.2s ease !important;
+}
+
+/* --- DYNAMIC DASHBOARD COMPONENT ANIMATION --- */
+.dashboard-img-anim {
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.dashboard-img-anim.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* =========================================================
+   RIZTA UI & CONFIGURATOR
+   ========================================================= */
+.rizta-sub-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 4rem;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.rizta-sub-navbar a { 
+  transition: color 0.3s; 
+}
+
+.rizta-sub-navbar a:hover { 
+  color: var(--accent) !important; 
+}
+
+/* Gallery Slider Styles */
+.gallery-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.gallery-slide.active {
+  opacity: 1;
+}
+
+.color-type-tabs span {
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.3s ease;
+  padding-bottom: 10px;
+  position: relative;
+}
+
+.color-type-tabs span.active {
+  color: #ffffff !important;
+}
+
+.color-type-tabs span.active::after {
+  content: '';
+  position: absolute;
+  bottom: -13px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+}
+
+#riztaView .color-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+#riztaView .color-pill.active {
+  transform: scale(1.2);
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.3), 0 0 12px rgba(255, 255, 255, 0.6);
+}
+
+#riztaConfigImage {
+  /* Ensure smooth transitioning of scale and opacity to prevent glitching */
+  transition: transform 0.4s ease, max-width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease !important;
+}
+
+#riztaConfigImage.boom-active {
+  /* Dynamically restricts main image width when booming to nest perfectly between galleries */
+  max-width: 55% !important; 
+}
+
+/* --- BOOM INTERACTION CSS --- */
+.floating-images-container {
+  position: absolute;
+  top: 0;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* CRITICAL FIX: Z-index set very high to stay above the main scooter image */
+  z-index: 15; 
+}
+
+.floating-images-container.left {
+  left: 10%;
+  transform: translateX(50px) scale(0.5);
+}
+
+.floating-images-container.right {
+  right: 10%;
+  transform: translateX(-50px) scale(0.5);
+}
+
+.floating-images-container.boom.left {
+  left: 0%;
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floating-images-container.boom.right {
+  right: 0%;
+  transform: translateX(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.floating-image {
+  width: 130px;
+  height: 80px; 
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,0.3);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.floating-image:hover {
+  transform: scale(1.15);
+  border-color: #00E296;
+  z-index: 20;
+  position: relative;
+}
+
+.hidden-floating {
+  display: none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN (TABLETS & MOBILE)
+   Overrides inline HTML and original CSS logic dynamically
+   ========================================================= */
+
+/* --- TABLETS (Up to 1024px) --- */
+@media screen and (max-width: 1024px) {
+  .home-slider-container { height: auto; padding: 40px 0; }
+  .home-slide { flex-direction: column; gap: 40px; text-align: center; position: relative; display: none; }
+  .home-slide.active { display: flex; opacity: 1; animation: fadeIn 0.8s ease-in; }
+  .home-slide img { width: 80%; max-width: 450px; }
+  .neon-box { width: 90%; max-width: 600px; text-align: center; padding: 30px; }
+  
+  /* Feature Grids */
+  .grid-container { grid-template-columns: repeat(2, 1fr) !important; padding: 0 20px; }
+
+  /* Spec Strip Adjustment */
+  .spec-strip { grid-template-columns: repeat(2, 1fr); padding: 30px 0; gap: 30px 0; border-bottom: none; }
+  .spec-item:nth-child(2) { border-right: none; }
+
+  /* Adjust Videos */
+  #perf-video-container, .rizta-video-container { height: 50vh !important; min-height: 400px !important; }
+
+  /* Navbars */
+  .navbar { flex-direction: column; padding: 15px; gap: 20px; }
+  .nav-links { margin-left: 0 !important; width: 100%; justify-content: center; }
+}
+
+/* --- MOBILE DEVICES (Up to 768px) --- */
+@media screen and (max-width: 768px) {
+  /* Typography Scaling */
+  h1, #perfHeroTitle, #riztaHeroTitle { font-size: 2.8rem !important; line-height: 1.1; }
+  h2, .hero-subtitle-large { font-size: 2.2rem !important; }
+  .brand { font-size: 1.5rem; }
+
+  /* Header & Navigation */
+  .main-site-header { position: relative; border-bottom: none !important; }
+  .nav-links { flex-wrap: wrap; gap: 15px !important; }
+  .nav-item { font-size: 0.85rem; }
+  
+  /* Sub Navbars - enable horizontal scrolling on mobile */
+  .rizta-sub-navbar { flex-direction: column; padding: 15px !important; gap: 15px; }
+  .rizta-sub-navbar > div { width: 100%; overflow-x: auto; padding-bottom: 10px; justify-content: flex-start !important; }
+  .rizta-sub-navbar > div::-webkit-scrollbar { height: 4px; }
+  .rizta-sub-navbar > div::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 4px; }
+
+  /* Video & Galleries */
+  #perf-video-container, .rizta-video-container { height: 35vh !important; min-height: 250px !important; border-radius: 10px !important; }
+  .gallery-slider-container { height: 300px !important; }
+
+  /* Feature Grid forced to single column */
+  .grid-container { grid-template-columns: 1fr !important; gap: 20px !important; }
+
+  /* Spec Strip completely stacked */
+  .spec-strip { grid-template-columns: 1fr; padding: 20px 0; gap: 20px; text-align: center; }
+  .spec-item { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+  .spec-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .spec-item h3 { font-size: 2.2rem; }
+
+  /* Configurator and Boom Interaction Layout */
+  #perfConfigWrapper, #riztaConfigWrapper { height: 350px !important; }
+  #perfBannerText, #riztaBannerText { 
+    font-size: 1.5rem !important; 
+    top: 5% !important; 
+    left: 0 !important; 
+    width: 100%; 
+    text-align: center !important; 
+    max-width: none !important; 
+  }
+  
+  /* Override user injected style for mobile bounds */
+  .floating-image { width: 65px !important; height: 45px !important; border-radius: 5px !important; }
+  .floating-images-container { width: 15%; gap: 8px; }
+  
+  /* Shift boom images to avoid completely blocking the scooter on small screens */
+  .floating-images-container.boom.left { left: 2% !important; }
+  .floating-images-container.boom.right { right: 2% !important; }
+
+  /* Adjust color pills groupings to stack nicely */
+  #perf-colour > div > div:nth-child(3), 
+  #colour > div > div:nth-child(3) { 
+    flex-wrap: wrap; 
+    padding: 0 10px;
+    gap: 30px !important;
+  }
+  .color-pill { width: 30px !important; height: 30px !important; }
+
+  /* Comparisons Table Scroll Fix */
+  .comparison-box { padding: 20px !important; }
+  .comparison-box h2 { font-size: 1.8rem !important; }
+  table th, table td { padding: 10px !important; font-size: 0.9rem !important; }
+}
+
+/* --- SMALL MOBILE FIXES (< 400px) --- */
+@media screen and (max-width: 400px) {
+  h1, #perfHeroTitle, #riztaHeroTitle { font-size: 2.2rem !important; }
+  .neon-box { padding: 20px; width: 95%; }
+  .neon-btn { padding: 10px 20px; font-size: 0.8rem; }
+  .home-slide img { width: 90%; }
+}
