@@ -50,7 +50,6 @@ const atherModels = {
       name: '450 Apex', subtitle: 'The Pinnacle of Speed', price: '₹ 1.90 Lakh', 
       specs: { accel: '2.9 SECS', speed: '100 KMPH', torque: '26 NM', range: '157 KM*' }, 
       views: { 
-          // FIXED: Set strictly to apex-model.jpeg for Apex views
           exterior: 'images/apex-assets/apex-model.jpeg', 
           dashboard: [
               'images/apex-assets/Ather-450-Apex-Call-Music-Control.webp',
@@ -69,16 +68,16 @@ const atherModels = {
   }
 };
 
-/* --- RIZTA COLOUR DATA --- */
+/* --- RIZTA COLOUR DATA (FIXED VERCEL CASE SENSITIVITY) --- */
 const riztaColors = [
     { category: 'matte', name: 'Terracotta Red', hex: '#942B28', bg: '#4A1514', src: 'images/rizta-assets/Rizta-Red-Super-Matte.webp' },
     { category: 'matte', name: 'Stealth Blue', hex: '#1C2938', bg: '#0E141C', src: 'images/rizta-assets/Blue-Mono.webp' },
     { category: 'duo', name: 'Terracotta Red Duo', hex: 'linear-gradient(135deg, #942B28 50%, #F2F2F2 50%)', bg: '#4A1514', src: 'images/rizta-assets/Rizta-Terracotta-Red-Duo-New.webp' },
-    { category: 'duo', name: 'Stealth Blue Duo', hex: 'linear-gradient(135deg, #1C2938 50%, #F2F2F2 50%)', bg: '#0E141C', src: 'images/rizta-assets/blue-duo.webp' },
-    { category: 'duo', name: 'Yellow Duo', hex: 'linear-gradient(135deg, #D4B856 50%, #F2F2F2 50%)', bg: '#6A5C2B', src: 'images/rizta-assets/yellow-duo.webp' },
-    { category: 'duo', name: 'Green Duo', hex: 'linear-gradient(135deg, #7A8B7A 50%, #F2F2F2 50%)', bg: '#3D453D', src: 'images/rizta-assets/green-duo.webp' },
-    { category: 'duo', name: 'Grey Duo', hex: 'linear-gradient(135deg, #6B6D6C 50%, #F2F2F2 50%)', bg: '#353636', src: 'images/rizta-assets/grey-duo.webp' },
-    { category: 'mono', name: 'Grey Mono', hex: '#6B6D6C', bg: '#353636', src: 'images/rizta-assets/grey-mono.webp' },
+    { category: 'duo', name: 'Stealth Blue Duo', hex: 'linear-gradient(135deg, #1C2938 50%, #F2F2F2 50%)', bg: '#0E141C', src: 'images/rizta-assets/Blue-Duo.webp' },
+    { category: 'duo', name: 'Yellow Duo', hex: 'linear-gradient(135deg, #D4B856 50%, #F2F2F2 50%)', bg: '#6A5C2B', src: 'images/rizta-assets/Yellow-Duo.webp' },
+    { category: 'duo', name: 'Green Duo', hex: 'linear-gradient(135deg, #7A8B7A 50%, #F2F2F2 50%)', bg: '#3D453D', src: 'images/rizta-assets/Green-Duo.webp' },
+    { category: 'duo', name: 'Grey Duo', hex: 'linear-gradient(135deg, #6B6D6C 50%, #F2F2F2 50%)', bg: '#353636', src: 'images/rizta-assets/Grey-Duo.webp' },
+    { category: 'mono', name: 'Grey Mono', hex: '#6B6D6C', bg: '#353636', src: 'images/rizta-assets/Grey-Mono.webp' },
     { category: 'mono', name: 'Pristine White', hex: '#F2F2F2', bg: '#222222', src: 'images/rizta-assets/White-Mono.webp' }
 ];
 
@@ -91,7 +90,6 @@ const perfColors = [
     { category: 'series', name: 'Stealth Blue', hex: '#1C2938', bg: '#0A0F14', src: 'images/450-assets/Ather-450-colours-Stealth-Blue.webp' },
     { category: 'series', name: 'Still White', hex: '#F2F2F2', bg: '#1A1A1A', src: 'images/450-assets/Ather-450-colours-Still-White.webp' },
     { category: 'series', name: 'True Red', hex: '#B21E23', bg: '#1A0505', src: 'images/450-assets/Ather-450-colours-True-Red.webp' },
-    // FIXED: Set strictly to apex-model.jpeg
     { category: 'apex', name: 'Indium Blue', hex: 'linear-gradient(135deg, #0B1B2B 50%, #00E296 50%)', bg: '#050a14', src: 'images/apex-assets/apex-model.jpeg' }
 ];
 
@@ -106,7 +104,6 @@ const boomAssets = [
   'images/rizta-assets/ather-switches-buttons-duo-red.avif'
 ];
 
-// Used for 450S and 450X
 const perfBoomAssets = [
   'images/450-assets/450-chassis-d.webp',
   'images/450-assets/Ather-450-monoshock-d.webp',
@@ -119,7 +116,6 @@ const perfBoomAssets = [
   'images/450-assets/450s-floorboard.avif'
 ];
 
-// EXCLUSIVE APEX BOOM ASSETS
 const apexBoomAssets = [
   'images/apex-assets/apex1.jpeg',
   'images/apex-assets/apex2.jpeg',
@@ -149,7 +145,6 @@ let currentPerfBoomBaseSrc = '';
 const domRefs = {
   pageTitle: document.getElementById('pageTitle'),
   
-  // 450/Apex Refs
   perfHeroTitle: document.getElementById('perfHeroTitle'),
   heroSubtitle: document.getElementById('heroSubtitle'),
   heroPrice: document.getElementById('heroPrice'),
@@ -164,7 +159,6 @@ const domRefs = {
   perfRightFloating: document.getElementById('perfRightFloatingImages'),
   perfBannerText: document.getElementById('perfBannerText'),
 
-  // Rizta Refs
   riztaHeroTitle: document.getElementById('riztaHeroTitle'),
   riztaHeroSubtitle: document.getElementById('riztaHeroSubtitle'),
   riztaHeroPrice: document.getElementById('riztaHeroPrice'),
@@ -182,7 +176,6 @@ window.selectVariant = function(variantKey) {
   window.location.hash = variantKey; 
 };
 
-/* --- SLIDERS LOGIC --- */
 function startHomeSlider() {
     let slides = document.querySelectorAll('.home-slide');
     if (!slides.length) return;
@@ -231,7 +224,6 @@ function stopAllSliders() {
     if(dashboardInterval) clearInterval(dashboardInterval); 
 }
 
-/* --- INTERACTIVE RIZTA BOOM --- */
 function resetBoomState() {
     if(!isBoomActive || !domRefs.riztaConfigImage) return;
     isBoomActive = false;
@@ -286,7 +278,6 @@ if(domRefs.riztaConfigImage) {
     });
 }
 
-/* --- INTERACTIVE 450/APEX BOOM --- */
 function resetPerfBoomState() {
     if(!isPerfBoomActive || !domRefs.perfConfigImage) return;
     isPerfBoomActive = false;
@@ -295,7 +286,6 @@ function resetPerfBoomState() {
     domRefs.perfLeftFloating.classList.remove('boom');
     domRefs.perfRightFloating.classList.remove('boom');
     
-    // Removing blend mode hack when closing boom
     domRefs.perfConfigImage.style.mixBlendMode = 'normal';
     
     if(domRefs.perfBannerText) {
@@ -322,27 +312,37 @@ if(domRefs.perfConfigImage) {
                 domRefs.perfBannerText.style.transform = 'scale(0.9)';
             }
 
-            const assetsToUse = (selectedModel === 'apex') ? apexBoomAssets : perfBoomAssets;
+            // FIXED APEX LOGIC: Now it checks if the active color is Apex, not just the URL hash
+            const activeBannerText = domRefs.perfBannerText ? domRefs.perfBannerText.textContent : '';
+            const isCurrentlyApex = (selectedModel === 'apex' || activeBannerText === 'Indium Blue');
+            const assetsToUse = isCurrentlyApex ? apexBoomAssets : perfBoomAssets;
 
             assetsToUse.forEach((src, idx) => {
                 const img = document.createElement('img');
                 img.src = src; 
                 img.className = 'floating-image';
 
-                // FIXED OVERLAP BUG: Hardcoded style to strictly keep thumbnails inside bounding boxes
-                img.style.width = '100px';
-                img.style.height = '65px';
-                img.style.objectFit = 'contain';
-                img.style.borderRadius = '8px';
-                img.style.border = '1px solid rgba(255,255,255,0.2)';
-                img.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                // FIXED THUMBNAIL ASPECT RATIO: 'cover' prevents vertical images from squishing
+                img.style.width = '110px';
+                img.style.height = '75px';
+                img.style.objectFit = 'cover'; 
+                img.style.objectPosition = 'center';
+                img.style.borderRadius = '10px';
+                img.style.border = '2px solid rgba(255,255,255,0.15)';
+                img.style.backgroundColor = 'rgba(0,0,0,0.6)';
                 img.style.cursor = 'pointer';
-                img.style.transition = 'transform 0.2s';
+                img.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                 
-                img.onmouseover = () => img.style.transform = 'scale(1.1)';
-                img.onmouseout = () => img.style.transform = 'scale(1)';
+                img.onmouseover = () => {
+                    img.style.transform = 'scale(1.15)';
+                    img.style.borderColor = '#00E296';
+                };
+                img.onmouseout = () => {
+                    img.style.transform = 'scale(1)';
+                    img.style.borderColor = 'rgba(255,255,255,0.15)';
+                };
 
-                if (selectedModel === 'apex') {
+                if (isCurrentlyApex) {
                     img.style.mixBlendMode = 'lighten';
                 }
 
@@ -351,7 +351,7 @@ if(domRefs.perfConfigImage) {
                     const tempSrc = domRefs.perfConfigImage.src;
                     domRefs.perfConfigImage.src = img.src; img.src = tempSrc;
                     
-                    if (selectedModel === 'apex') {
+                    if (isCurrentlyApex) {
                         domRefs.perfConfigImage.style.mixBlendMode = 'lighten';
                     }
                 };
@@ -367,10 +367,7 @@ if(domRefs.perfConfigImage) {
     });
 }
 
-/* --- COLOR CONFIGURATORS INITIALIZATION --- */
 function initColorPickers() {
-    
-    // Rizta Configurator Init
     const matteContainer = document.getElementById('mattePills');
     const duoContainer = document.getElementById('duoPills');
     const monoContainer = document.getElementById('monoPills');
@@ -428,7 +425,6 @@ function initColorPickers() {
         });
     }
 
-    // 450/Apex Configurator Init
     const seriesContainer = document.getElementById('perfSeriesPills');
     const apexContainer = document.getElementById('perfApexPills');
 
@@ -493,7 +489,6 @@ function initColorPickers() {
     }
 }
 
-/* --- CENTRAL INTEGRATION ROUTER --- */
 function parseActiveHash() {
   const targetHash = window.location.hash.substring(1).trim().toLowerCase();
   stopAllSliders();
@@ -570,7 +565,6 @@ function renderTemplate() {
         if (domRefs.specTorque) domRefs.specTorque.textContent = model.specs.torque;
         if (domRefs.specRange) domRefs.specRange.textContent = model.specs.range;
         
-        // --- DYNAMIC DASHBOARD SLIDER LOGIC ---
         if (dashboardInterval) clearInterval(dashboardInterval); 
         
         if (Array.isArray(model.views.dashboard)) {
@@ -592,7 +586,6 @@ function renderTemplate() {
             domRefs.dashboardImage.style.opacity = '1';
         }
         
-        // --- DYNAMICALLY UPDATE GALLERY IMAGES ---
         const gallerySlider = document.getElementById('perfGallerySlider');
         if (gallerySlider && model.gallery) {
             gallerySlider.innerHTML = ''; 
@@ -607,7 +600,6 @@ function renderTemplate() {
             startPerfGallerySlider(); 
         }
 
-        // --- DYNAMIC AUTO-CLICK FOR COLOR CONFIGURATOR ---
         setTimeout(() => {
             if (selectedModel === 'apex') {
                 const apexPill = document.querySelector('.color-pill[data-color-name="Indium Blue"]');
@@ -621,7 +613,6 @@ function renderTemplate() {
             }
         }, 100);
 
-        // --- VIDEO LOGIC ---
         if (model.views.video) {
             domRefs.perfVideo.innerHTML = `<source src="${model.views.video}" type="video/mp4">`;
             domRefs.perfVideo.parentElement.style.display = 'block';
