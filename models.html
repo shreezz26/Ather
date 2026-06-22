@@ -43,49 +43,60 @@
     .model-toggle-btn.active:hover {
         background: #111111;
     }
+    .floating-image {
+        width: 110px !important;
+        height: 70px !important;
+        object-fit: contain !important;
+        background: rgba(0, 0, 0, 0.3);
+    }
+    .price-subtext {
+        font-size: 0.85rem;
+        color: #888;
+        font-weight: 400;
+        display: block;
+        margin-top: 4px;
+    }
   </style>
 </head>
 <body class="select-model-page">
 
-  <header class="dark-header">
-    <div class="navbar">
-      <div class="brand" style="color: #fff; cursor: pointer;" onclick="openModelSelector()">ATHER <span style="font-weight: 300; margin-left: 8px;">SELECT</span></div>
-      <nav class="nav-links">
-        <span class="nav-item light-nav" onclick="openModelSelector()" style="cursor: pointer; margin-right: 15px;">🏍️ Change Model</span>
-        <span id="authStatusText" class="nav-item light-nav auth-trigger" onclick="openAuthModal()">Login / Register</span>
+  <header class="dark-header" style="position: sticky; background: #000; border-bottom: 1px solid #111; z-index: 1000; width: 100%; top: 0;">
+    <div class="navbar" style="padding: 15px 30px;">
+      <div class="brand" style="color: #fff; font-weight: 800; letter-spacing: 1.5px; cursor: pointer;" onclick="window.location.href='index.html'">ATHER <span style="font-weight: 300; margin-left: 8px;">SELECT</span></div>
+      <nav class="nav-links" style="margin-right: auto; margin-left: 40px; gap: 35px;">
+        <span class="nav-item light-nav" onclick="window.location.href='index.html'" style="cursor: pointer;">🏍️ Change Model</span>
+        <span id="authStatusText" class="nav-item light-nav auth-trigger" onclick="openAuthModal()" style="cursor: pointer;">Login / Register</span>
         <a href="index.html" class="nav-item light-nav">&larr; Return Home</a>
       </nav>
     </div>
   </header>
 
-  <aside class="floating-action-menu">
-    <a href="#" class="float-btn" onclick="initiateVehicleBooking()"><span id="ebookBtnText">E-BOOK ATHER</span> &nearr;</a>
-    <a href="#" class="float-btn" onclick="alert('Our team will contact you shortly.')"><span>REQUEST CALLBACK</span> &nearr;</a>
-  </aside>
-
   <main>
     <div id="performanceView" class="hidden">
-      <nav class="rizta-sub-navbar" style="display: flex; background: #050505; color: #fff; padding: 15px 40px; justify-content: space-between; align-items: center; border-bottom: 1px solid #111;">
+      <nav class="rizta-sub-navbar" style="display: flex; background: #050505; color: #fff; padding: 15px 40px; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; position: sticky; top: 70px; z-index: 99;">
         <span id="perfModelTitle" style="font-weight: 800; font-size: 1.2rem; letter-spacing: 1px;">ATHER 450</span>
         <div style="display: flex; gap: 20px; font-weight: 600; font-size: 0.85rem; color: #aaa; margin-left: auto;">
-          <a href="javascript:void(0)" onclick="document.getElementById('perf-overview').scrollIntoView({behavior: 'smooth', block: 'start'})">Overview</a>
-          <a href="javascript:void(0)" onclick="document.getElementById('perf-handling').scrollIntoView({behavior: 'smooth', block: 'start'})">Handling</a>
-          <a href="javascript:void(0)" onclick="document.getElementById('perf-tech').scrollIntoView({behavior: 'smooth', block: 'start'})">Tech</a>
-          <a href="javascript:void(0)" onclick="document.getElementById('perf-colour').scrollIntoView({behavior: 'smooth', block: 'start'})">Colour</a>
-          <a href="javascript:void(0)" onclick="document.getElementById('perf-comparison').scrollIntoView({behavior: 'smooth', block: 'start'})" style="color:#fff; border-bottom: 2px solid #00E296; padding-bottom:4px;">Comparison</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-overview')">Overview</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-handling')">Handling</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-tech')">Tech</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-accessories')">Accessories</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-colour')">Colour</a>
+          <a href="javascript:void(0)" onclick="smoothScrollTo('perf-comparison')" style="color:#fff; border-bottom: 2px solid #00E296; padding-bottom:4px;">Comparison</a>
         </div>
       </nav>
 
       <section class="select-hero" id="perf-overview" style="background: radial-gradient(circle at center, #111 0%, #000 100%); padding-top: 50px;">
         <div class="hero-text-container" style="top: 10%; width: 100%; display: flex; flex-direction: column; align-items: center;">
           
-          <!-- HARDCODED MODEL TOGGLE - Hidden by inline CSS initially -->
           <div id="modelToggleContainer" class="model-toggle-wrapper" style="display: none;">
             <div id="btn-toggle-450s" class="model-toggle-btn" onclick="selectVariant('450s')">
                 450<span style="color: #FFD700; font-weight: 900; margin-left: 2px;">S</span>
             </div>
             <div id="btn-toggle-450x" class="model-toggle-btn" onclick="selectVariant('450x')">
                 450<span style="color: #FF0000; font-weight: 900; margin-left: 2px;">X</span>
+            </div>
+            <div id="btn-toggle-apex" class="model-toggle-btn" onclick="selectVariant('apex')">
+                450<span style="color: #00d2ff; font-weight: 900; margin-left: 4px;">Apex</span>
             </div>
           </div>
 
@@ -104,8 +115,190 @@
         <div class="spec-item"><h3 id="specRange">--</h3><p>CERTIFIED RANGE</p></div>
       </section>
 
-      <!-- Sections Truncated for Brevity - Keep your existing Handling, Tech, and Colour sections here -->
+      <section class="feature-section section-wrapper" id="perf-handling" style="background: #050505; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Built for Peak Performance</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">Performance in full form. And function.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Aluminium Chassis</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Lightweight and heavy-duty. Built to glide and handle like a dream.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Balanced Weight Distribution</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Sharp turns. Steep curves. Tight corners. Find the balance you need on them.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Monoshock Suspension</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Bumps. Pot holes. Bad roads. Hold steady, and breeze through them all.</p>
+              </div>
+          </div>
+      </section>
 
+      <section class="feature-section section-wrapper" id="perf-tech" style="background: #0a0a0a; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Ride Quick. Ride Easy.</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">Performance hits new peaks with features that make every ride feel like magic.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Magic Twist™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">One throttle does it all - speeding up and slowing down. Here's a new twist to braking.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">AutoHold™ on slopes</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Halt and hold steady on slopes without brakes. Any slope, any angle, all detected automatically.</p>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Park Assist™</h3>
+                  <p style="color: #aaa; font-size: 1.05rem;">Ride in reverse at the press of a button. While the taillights alert others nearby.</p>
+              </div>
+          </div>
+      </section>
+
+      <!-- 450 ACCESSORIES SECTION -->
+      <section class="explore-section section-wrapper" id="perf-accessories" style="background: #050505; padding: 80px 20px;">
+          <div class="section-header" style="text-align: center; margin-bottom: 50px;">
+              <h2 style="font-size: 3.5rem; font-weight: 900; color: #fff;">Performance Upgrades</h2>
+              <p style="font-size: 1.2rem; color: #ccc;">Customise your ride with curated kits and smart accessories.</p>
+          </div>
+          <div class="grid-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto;">
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Essential Kit</h3>
+                  <p style="color: #00E296; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">₹ 3,722</p>
+                  <ul style="color: #aaa; font-size: 1.05rem; list-style-position: inside; line-height: 1.8;">
+                      <li>Seat Cover (₹ 899)</li>
+                      <li>Floor Mat (₹ 549)</li>
+                      <li>Side Step (₹ 1,999)</li>
+                      <li>Grip Cover (₹ 275)</li>
+                  </ul>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Add-ons & Upgrades</h3>
+                  <p style="color: #00E296; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">Exclusive Offer Pricing</p>
+                  <ul style="color: #aaa; font-size: 1.05rem; list-style-position: inside; line-height: 1.8;">
+                      <li>450 Frunk: <span style="text-decoration: line-through; opacity: 0.5;">₹ 2,999</span> ₹ 1,499</li>
+                      <li>450 Bodyguard: <span style="text-decoration: line-through; opacity: 0.5;">₹ 1,699</span> ₹ 1,199</li>
+                      <li>TPMS: <span style="text-decoration: line-through; opacity: 0.5;">₹ 4,999</span> ₹ 2,499</li>
+                      <li>Care Kit: ₹ 799</li>
+                  </ul>
+              </div>
+              <div class="variant-card dynamic-neon-card" style="padding: 30px; border-radius: 12px; text-align: left; --dynamic-neon: #00E296;">
+                  <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 10px; color: #fff;">Smart Gear & Protection</h3>
+                  <p style="color: #00E296; font-size: 1.2rem; font-weight: 700; margin-bottom: 15px;">Halo & Warranty</p>
+                  <ul style="color: #aaa; font-size: 1.05rem; list-style-position: inside; line-height: 1.8;">
+                      <li>Halo Smart Helmet: ₹ 6,999</li>
+                      <li>Halo Bit Module: <span style="text-decoration: line-through; opacity: 0.5;">₹ 4,999</span> ₹ 3,000</li>
+                      <li>Extended Battery Warranty: ₹ 4,999</li>
+                      <li>Extended Comprehensive: ₹ 3,499</li>
+                  </ul>
+              </div>
+          </div>
+      </section>
+
+      <section id="perf-colour" style="padding: 100px 20px; text-align: center; background-color: #0a0a0a; color: #fff; transition: background-color 0.4s ease;">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center;">
+          
+          <div style="align-self: flex-start; text-align: left; margin-bottom: 40px; margin-left: 10%;">
+            <h2 style="font-size: 3rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px; color: #00E296;">Signature Aesthetics</h2>
+            <p style="font-size: 1.1rem; color: #aaa; max-width: 350px;">Choose a high-gloss signature racing profile.</p>
+          </div>
+
+          <div style="width: 100%; max-width: 1000px; height: 550px; display: flex; justify-content: center; align-items: center; margin-bottom: 40px; position: relative;" id="perfConfigWrapper">
+            <div id="perfColorBanner" style="position: absolute; top: 15%; left: 5%; right: 5%; bottom: 15%; border-radius: 100px; background: #111; z-index: 1; transition: background 0.4s ease;"></div>
+            <h2 id="perfBannerText" style="position: absolute; left: 8%; z-index: 20; font-size: 2.2rem; font-weight: 900; color: #fff; max-width: 250px; line-height: 1.2; text-align: left; pointer-events: none; text-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: opacity 0.3s ease, transform 0.3s ease;">Hyper Sand</h2>
+
+            <div id="perfLeftFloatingImages" class="floating-images-container left hidden-floating"></div>
+            <img id="perfConfigImage" src="" onerror="this.src='https://placehold.co/800x600/111/00E296?text=Ather+450+Colour'" alt="450 Configurator Asset" style="width: 100%; max-width: 600px; height: 100%; max-height: 450px; object-fit: contain; z-index: 10; position: relative; transition: all 0.4s ease; cursor: pointer;" />
+            <div id="perfRightFloatingImages" class="floating-images-container right hidden-floating"></div>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 50px; margin-top: 20px;">
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="perfSeriesPills" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: 400px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #fff;">Performance Series</span>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                <div id="perfApexPills" style="display: flex; gap: 12px;"></div>
+                <span style="font-size: 1.15rem; font-weight: 600; color: #00E296;">Apex Exclusive</span>
+            </div>
+          </div>
+
+          <!-- FULL COMPREHENSIVE PERFORMANCE COMPARISON -->
+          <div id="perf-comparison" class="comparison-box dynamic-neon-card" style="margin-top: 100px; width: 100%; max-width: 1000px; padding: 40px; border-radius: 20px; --dynamic-neon: #00E296;">
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 30px; text-align: center; color: #fff;">The Performance Lineup Pricing & Add-ons</h2>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 1.05rem; color: #eee;">
+                <thead>
+                  <tr style="border-bottom: 2px solid rgba(0, 226, 150, 0.4);">
+                    <th style="padding: 15px; font-weight: 700; color: #aaa; width: 25%;">Features & Pricing</th>
+                    <th style="padding: 15px; font-weight: 800; color: #fff;">450S</th>
+                    <th style="padding: 15px; font-weight: 800; color: #00E296;">450X (126km / 161km)</th>
+                    <th style="padding: 15px; font-weight: 800; color: #00d2ff;">450 Apex</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Effective Ex-Showroom</td>
+                    <td style="padding: 15px;">₹ 1,32,891</td>
+                    <td style="padding: 15px;">₹ 1,49,392 / ₹ 1,59,891</td>
+                    <td style="padding: 15px;">₹ 1,90,891</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Pro Pack</td>
+                    <td style="padding: 15px;">₹ 15,000</td>
+                    <td style="padding: 15px;">₹ 22,500 / ₹ 23,500</td>
+                    <td style="padding: 15px;">Included</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Essential Kit <span class="price-subtext">Seat cover, Floor Mat, Side step, Grip cover</span></td>
+                    <td style="padding: 15px;" colspan="3">₹ 3,722</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Popular Add-ons <span class="price-subtext">Offer Pricing</span></td>
+                    <td style="padding: 15px;" colspan="3">
+                        • 450 Frunk: ₹ 1,499 &nbsp;|&nbsp; • Bodyguard: ₹ 1,199<br>
+                        • Halo Helmet: ₹ 6,999 &nbsp;|&nbsp; • Halo Bit: ₹ 3,000 &nbsp;|&nbsp; • TPMS: ₹ 2,499
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Warranty & Care Plans</td>
+                    <td style="padding: 15px;" colspan="3">
+                        • Extended Battery Warranty (EBW): ₹ 4,999 &nbsp;|&nbsp; • Extended Comprehensive Warranty (ECW): ₹ 3,499<br>
+                        • Assured Buyback (Up to 60%): ₹ 2,499
+                    </td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Acceleration (0-40)</td>
+                    <td style="padding: 15px;">3.9 Seconds</td>
+                    <td style="padding: 15px;">3.3 Seconds</td>
+                    <td style="padding: 15px;">2.9 Seconds</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Top Speed</td>
+                    <td style="padding: 15px;">90 km/h</td>
+                    <td style="padding: 15px;">90 km/h</td>
+                    <td style="padding: 15px;">100 km/h</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Peak Power</td>
+                    <td style="padding: 15px;">5.4 kW</td>
+                    <td style="padding: 15px;">6.4 kW</td>
+                    <td style="padding: 15px;">7.0 kW</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                    <td style="padding: 15px; font-weight: 600;">Dashboard</td>
+                    <td style="padding: 15px;">DeepView™ Display</td>
+                    <td style="padding: 15px;">7" TFT Touchscreen</td>
+                    <td style="padding: 15px;">7" TFT Touchscreen</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 

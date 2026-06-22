@@ -15,17 +15,17 @@ window.smoothScrollTo = function(elementId) {
 /* --- EXCLUSIVE INDIVIDUAL VARIANT DATA SCHEMA --- */
 const atherModels = {
   'rizta-s': { 
-      name: 'Rizta S', subtitle: 'Everyday Urban Comfort', price: '₹ 1.12 Lakh', 
+      name: 'Rizta S', subtitle: 'Everyday Urban Comfort', price: '₹ 1.18 Lakh', 
       specs: { accel: '4.7 SECS', speed: '80 KMPH', torque: '22 NM', range: '123 KM*' }, 
       views: { exterior: 'images/rizta-assets/White-Mono.webp' } 
   },
   'rizta-z': { 
-      name: 'Rizta Z', subtitle: 'The Ultimate Family Upgrade', price: '₹ 1.46 Lakh', 
+      name: 'Rizta Z', subtitle: 'The Ultimate Family Upgrade', price: '₹ 1.34 Lakh', 
       specs: { accel: '4.7 SECS', speed: '80 KMPH', torque: '22 NM', range: '159 KM*' }, 
       views: { exterior: 'images/rizta-assets/Rizta-Terracotta-Red-Duo-New.webp' } 
   },
   '450s': { 
-      name: '450S', subtitle: 'Entry to Performance', price: '₹ 1.32 Lakh', 
+      name: '450S', subtitle: 'Entry to Performance', price: '₹ 1.33 Lakh', 
       specs: { accel: '3.9 SECS', speed: '90 KMPH', torque: '22 NM', range: '122 KM*' }, 
       views: { exterior: 'images/450-assets/Ather-450-colours-Stealth-Blue.webp', dashboard: 'images/450-assets/450-dashboard-s-d.webp', video: 'images/450-assets/ather-450s.mp4' },
       gallery: [
@@ -47,7 +47,7 @@ const atherModels = {
       ]
   },
   'apex': { 
-      name: '450 Apex', subtitle: 'The Pinnacle of Speed', price: '₹ 1.90 Lakh', 
+      name: '450 Apex', subtitle: 'The Pinnacle of Speed', price: '₹ 1.91 Lakh', 
       specs: { accel: '2.9 SECS', speed: '100 KMPH', torque: '26 NM', range: '157 KM*' }, 
       views: { 
           exterior: 'images/apex-assets/apex-model.jpeg', 
@@ -68,7 +68,7 @@ const atherModels = {
   }
 };
 
-/* --- RIZTA COLOUR DATA (FIXED VERCEL CASE SENSITIVITY) --- */
+/* --- RIZTA COLOUR DATA --- */
 const riztaColors = [
     { category: 'matte', name: 'Terracotta Red', hex: '#942B28', bg: '#4A1514', src: 'images/rizta-assets/Rizta-Red-Super-Matte.webp' },
     { category: 'matte', name: 'Stealth Blue', hex: '#1C2938', bg: '#0E141C', src: 'images/rizta-assets/Blue-Mono.webp' },
@@ -159,6 +159,12 @@ const domRefs = {
   perfRightFloating: document.getElementById('perfRightFloatingImages'),
   perfBannerText: document.getElementById('perfBannerText'),
 
+  // Dynamic Perf Configurator Details Box
+  perfConfigDetails: document.getElementById('perfConfigDetails'),
+  perfDetailName: document.getElementById('perfDetailName'),
+  perfDetailColor: document.getElementById('perfDetailColor'),
+  perfDetailPrice: document.getElementById('perfDetailPrice'),
+
   riztaHeroTitle: document.getElementById('riztaHeroTitle'),
   riztaHeroSubtitle: document.getElementById('riztaHeroSubtitle'),
   riztaHeroPrice: document.getElementById('riztaHeroPrice'),
@@ -169,7 +175,13 @@ const domRefs = {
   riztaSpecAccel: document.getElementById('riztaSpecAccel'),
   riztaSpecSpeed: document.getElementById('riztaSpecSpeed'),
   riztaSpecTorque: document.getElementById('riztaSpecTorque'),
-  riztaSpecRange: document.getElementById('riztaSpecRange')
+  riztaSpecRange: document.getElementById('riztaSpecRange'),
+
+  // Dynamic Rizta Configurator Details Box
+  riztaConfigDetails: document.getElementById('riztaConfigDetails'),
+  riztaDetailName: document.getElementById('riztaDetailName'),
+  riztaDetailColor: document.getElementById('riztaDetailColor'),
+  riztaDetailPrice: document.getElementById('riztaDetailPrice')
 };
 
 window.selectVariant = function(variantKey) {
@@ -232,6 +244,11 @@ function resetBoomState() {
     domRefs.leftFloating.classList.remove('boom');
     domRefs.rightFloating.classList.remove('boom');
     
+    // Bring back the specific model details panel
+    if(domRefs.riztaConfigDetails) {
+        domRefs.riztaConfigDetails.classList.remove('hidden-details');
+    }
+    
     if(domRefs.riztaBannerText) {
         domRefs.riztaBannerText.style.opacity = '1';
         domRefs.riztaBannerText.style.transform = 'scale(1)';
@@ -251,6 +268,11 @@ if(domRefs.riztaConfigImage) {
             domRefs.riztaConfigImage.classList.add('boom-active');
             domRefs.leftFloating.innerHTML = ''; domRefs.rightFloating.innerHTML = '';
             
+            // Hide the specific model details panel
+            if(domRefs.riztaConfigDetails) {
+                domRefs.riztaConfigDetails.classList.add('hidden-details');
+            }
+
             if(domRefs.riztaBannerText) {
                 domRefs.riztaBannerText.style.opacity = '0';
                 domRefs.riztaBannerText.style.transform = 'scale(0.9)';
@@ -288,6 +310,11 @@ function resetPerfBoomState() {
     
     domRefs.perfConfigImage.style.mixBlendMode = 'normal';
     
+    // Bring back the specific model details panel
+    if(domRefs.perfConfigDetails) {
+        domRefs.perfConfigDetails.classList.remove('hidden-details');
+    }
+    
     if(domRefs.perfBannerText) {
         domRefs.perfBannerText.style.opacity = '1';
         domRefs.perfBannerText.style.transform = 'scale(1)';
@@ -307,12 +334,16 @@ if(domRefs.perfConfigImage) {
             domRefs.perfConfigImage.classList.add('boom-active');
             domRefs.perfLeftFloating.innerHTML = ''; domRefs.perfRightFloating.innerHTML = '';
             
+            // Hide the specific model details panel
+            if(domRefs.perfConfigDetails) {
+                domRefs.perfConfigDetails.classList.add('hidden-details');
+            }
+
             if(domRefs.perfBannerText) {
                 domRefs.perfBannerText.style.opacity = '0';
                 domRefs.perfBannerText.style.transform = 'scale(0.9)';
             }
 
-            // FIXED APEX LOGIC: Now it checks if the active color is Apex, not just the URL hash
             const activeBannerText = domRefs.perfBannerText ? domRefs.perfBannerText.textContent : '';
             const isCurrentlyApex = (selectedModel === 'apex' || activeBannerText === 'Indium Blue');
             const assetsToUse = isCurrentlyApex ? apexBoomAssets : perfBoomAssets;
@@ -322,7 +353,6 @@ if(domRefs.perfConfigImage) {
                 img.src = src; 
                 img.className = 'floating-image';
 
-                // FIXED THUMBNAIL ASPECT RATIO: 'cover' prevents vertical images from squishing
                 img.style.width = '110px';
                 img.style.height = '75px';
                 img.style.objectFit = 'cover'; 
@@ -388,6 +418,7 @@ function initColorPickers() {
                 document.getElementById('riztaColorBanner').style.background = color.bg;
                 domRefs.riztaConfigImage.src = color.src;
                 domRefs.riztaConfigImage.style.cursor = 'pointer'; 
+                if(domRefs.riztaDetailColor) domRefs.riztaDetailColor.textContent = color.name;
             }
 
             pill.onclick = () => {
@@ -410,6 +441,7 @@ function initColorPickers() {
                 setTimeout(() => {
                     domRefs.riztaConfigImage.src = color.src;
                     domRefs.riztaBannerText.textContent = color.name;
+                    if(domRefs.riztaDetailColor) domRefs.riztaDetailColor.textContent = color.name;
                     document.getElementById('riztaColorBanner').style.background = color.bg;
                     
                     domRefs.riztaConfigImage.style.opacity = '1';
@@ -445,6 +477,7 @@ function initColorPickers() {
                 document.getElementById('perfColorBanner').style.background = color.bg;
                 domRefs.perfConfigImage.src = color.src;
                 domRefs.perfConfigImage.style.cursor = 'pointer';
+                if(domRefs.perfDetailColor) domRefs.perfDetailColor.textContent = color.name;
             }
 
             pill.onclick = () => {
@@ -467,6 +500,7 @@ function initColorPickers() {
                 setTimeout(() => {
                     domRefs.perfConfigImage.src = color.src;
                     domRefs.perfBannerText.textContent = color.name;
+                    if(domRefs.perfDetailColor) domRefs.perfDetailColor.textContent = color.name;
                     document.getElementById('perfColorBanner').style.background = color.bg;
 
                     domRefs.perfConfigImage.style.opacity = '1';
@@ -555,6 +589,11 @@ function renderTemplate() {
         if (domRefs.riztaSpecSpeed) domRefs.riztaSpecSpeed.textContent = model.specs.speed;
         if (domRefs.riztaSpecTorque) domRefs.riztaSpecTorque.textContent = model.specs.torque;
         if (domRefs.riztaSpecRange) domRefs.riztaSpecRange.textContent = model.specs.range;
+
+        // Sync details panel
+        if (domRefs.riztaDetailName) domRefs.riztaDetailName.textContent = model.name;
+        if (domRefs.riztaDetailPrice) domRefs.riztaDetailPrice.textContent = model.price;
+
     } else {
         if (domRefs.perfHeroTitle) domRefs.perfHeroTitle.textContent = `Meet ${model.name}`;
         if (domRefs.heroSubtitle) domRefs.heroSubtitle.textContent = model.subtitle;
@@ -564,6 +603,10 @@ function renderTemplate() {
         if (domRefs.specSpeed) domRefs.specSpeed.textContent = model.specs.speed;
         if (domRefs.specTorque) domRefs.specTorque.textContent = model.specs.torque;
         if (domRefs.specRange) domRefs.specRange.textContent = model.specs.range;
+
+        // Sync details panel
+        if (domRefs.perfDetailName) domRefs.perfDetailName.textContent = model.name;
+        if (domRefs.perfDetailPrice) domRefs.perfDetailPrice.textContent = model.price;
         
         if (dashboardInterval) clearInterval(dashboardInterval); 
         
