@@ -90,7 +90,7 @@ const perfColors = [
     { category: 'series', name: 'Stealth Blue', hex: '#1C2938', bg: '#0A0F14', src: 'images/450-assets/Ather-450-colours-Stealth-Blue.webp' },
     { category: 'series', name: 'Still White', hex: '#F2F2F2', bg: '#1A1A1A', src: 'images/450-assets/Ather-450-colours-Still-White.webp' },
     { category: 'series', name: 'True Red', hex: '#B21E23', bg: '#1A0505', src: 'images/450-assets/Ather-450-colours-True-Red.webp' },
-    { category: 'apex', name: 'Indium Blue', hex: 'linear-gradient(135deg, #0B1B2B 50%, #00E296 50%)', bg: '#050a14', src: 'images/apex-assets/apex-model.jpeg' }
+    { category: 'apex', name: 'Indium Blue', hex: 'linear-gradient(135deg, #0B1B2B 50%, #FF6600 50%)', bg: '#050a14', src: 'images/apex-assets/apex-model.jpeg' }
 ];
 
 /* --- INTERACTIVE BOOM ASSETS --- */
@@ -510,8 +510,10 @@ function initColorPickers() {
                     
                     if(color.category === 'apex') {
                         domRefs.perfConfigImage.style.mixBlendMode = 'lighten';
+                        if(domRefs.perfDetailPrice) domRefs.perfDetailPrice.style.color = '#FF6600';
                     } else {
                         domRefs.perfConfigImage.style.mixBlendMode = 'normal';
+                        if(domRefs.perfDetailPrice) domRefs.perfDetailPrice.style.color = '#00E296';
                     }
                     
                 }, 200);
@@ -604,9 +606,24 @@ function renderTemplate() {
         if (domRefs.specTorque) domRefs.specTorque.textContent = model.specs.torque;
         if (domRefs.specRange) domRefs.specRange.textContent = model.specs.range;
 
-        // Sync details panel
+        // Sync details panel & toggle price color dynamically for apex
         if (domRefs.perfDetailName) domRefs.perfDetailName.textContent = model.name;
-        if (domRefs.perfDetailPrice) domRefs.perfDetailPrice.textContent = model.price;
+        if (domRefs.perfDetailPrice) {
+            domRefs.perfDetailPrice.textContent = model.price;
+            domRefs.perfDetailPrice.style.color = selectedModel === 'apex' ? '#FF6600' : '#00E296';
+        }
+        
+        // HIDE OR SHOW THE APPROPRIATE COLOUR PILL WRAPPERS BASED ON MODEL
+        const seriesWrapper = document.getElementById('perfSeriesWrapper');
+        const apexWrapper = document.getElementById('perfApexWrapper');
+        
+        if (selectedModel === 'apex') {
+            if (seriesWrapper) seriesWrapper.style.display = 'none';
+            if (apexWrapper) apexWrapper.style.display = 'flex';
+        } else {
+            if (seriesWrapper) seriesWrapper.style.display = 'flex';
+            if (apexWrapper) apexWrapper.style.display = 'none';
+        }
         
         if (dashboardInterval) clearInterval(dashboardInterval); 
         
