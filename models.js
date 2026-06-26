@@ -596,6 +596,23 @@ function renderTemplate() {
         if (domRefs.riztaDetailName) domRefs.riztaDetailName.textContent = model.name;
         if (domRefs.riztaDetailPrice) domRefs.riztaDetailPrice.textContent = model.price;
 
+        // Toggle Duo colours visibility based on selected model
+        const duoPillsContainer = document.getElementById('duoPills');
+        if (duoPillsContainer && duoPillsContainer.parentElement) {
+            if (selectedModel === 'rizta-s') {
+                duoPillsContainer.parentElement.style.display = 'none';
+                
+                // Switch to a Mono colour automatically if a Duo colour is currently active
+                const activePill = document.querySelector('#colour .color-pill.active');
+                if (activePill && activePill.parentElement.id === 'duoPills') {
+                    const firstMono = document.querySelector('#monoPills .color-pill');
+                    if (firstMono) firstMono.click();
+                }
+            } else {
+                duoPillsContainer.parentElement.style.display = 'flex';
+            }
+        }
+
     } else {
         if (domRefs.perfHeroTitle) domRefs.perfHeroTitle.textContent = `Meet ${model.name}`;
         if (domRefs.heroSubtitle) domRefs.heroSubtitle.textContent = model.subtitle;
