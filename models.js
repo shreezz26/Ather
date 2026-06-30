@@ -1,3 +1,4 @@
+/* models.js */
 /* --- CUSTOM SMOOTH SCROLL FOR STICKY HEADERS --- */
 window.smoothScrollTo = function(elementId) {
     const el = document.getElementById(elementId);

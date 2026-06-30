@@ -1,3 +1,4 @@
+/* styles.css */
 /* --- COMPREHENSIVE STRUCTURAL DESIGN SYSTEM --- */
 :root {
   --primary: #ffffff;
@@ -586,24 +587,67 @@ button {
   .spec-item:last-child { border-bottom: none; padding-bottom: 0; }
   .spec-item h3 { font-size: 2.2rem; }
 
-  /* Configurator and Boom Interaction Layout */
-  #perfConfigWrapper, #riztaConfigWrapper { height: 350px !important; }
-  #perfBannerText, #riztaBannerText { 
-    font-size: 1.5rem !important; 
-    top: 5% !important; 
-    left: 0 !important; 
-    width: 100%; 
-    text-align: center !important; 
-    max-width: none !important; 
+  /* Configurator and Boom Interaction Layout - FIX FOR OVERLAPPING */
+  #perfConfigWrapper, #riztaConfigWrapper { 
+      height: 480px !important; 
+      margin-bottom: 20px !important;
   }
   
-  /* Override user injected style for mobile bounds */
-  .floating-image { width: 65px !important; height: 45px !important; border-radius: 5px !important; }
-  .floating-images-container { width: 15%; gap: 8px; }
+  #perfConfigImage, #riztaConfigImage {
+      max-height: 220px !important;
+      height: auto !important;
+      margin-top: 10px !important;
+  }
+  
+  #perfBannerText, #riztaBannerText { 
+      font-size: 1.6rem !important; 
+      top: 20px !important; 
+      left: 0 !important; 
+      width: 100% !important; 
+      text-align: center !important; 
+      max-width: none !important; 
+  }
   
   /* Shift boom images to avoid completely blocking the scooter on small screens */
-  .floating-images-container.boom.left { left: 2% !important; }
-  .floating-images-container.boom.right { right: 2% !important; }
+  .floating-images-container.boom.left { left: 1% !important; }
+  .floating-images-container.boom.right { right: 1% !important; }
+  
+  .floating-images-container.boom {
+      padding: 8px !important;
+      max-height: 70% !important;
+  }
+  
+  .floating-image { 
+      width: 60px !important; 
+      height: 40px !important; 
+      border-radius: 5px !important; 
+      margin-bottom: 5px !important;
+  }
+  
+  #perfConfigImage.boom-active,
+  #riztaConfigImage.boom-active {
+      max-width: 38% !important;
+  }
+
+  /* Override for config-details-panel in max-width: 768px */
+  .config-details-panel {
+      bottom: 15px !important;
+      top: auto !important;
+      left: 50% !important;
+      right: auto !important;
+      padding: 15px !important;
+      text-align: center !important;
+      width: 90% !important;
+      transform: translateX(-50%) !important;
+  }
+  .config-details-panel.hidden-details {
+      opacity: 0 !important;
+      transform: translate(-50%, 20px) scale(0.95) !important;
+      pointer-events: none;
+  }
+  .config-details-panel h3 { font-size: 1.5rem !important; margin-bottom: 5px !important; }
+  .config-details-panel p { font-size: 0.95rem !important; margin-bottom: 10px !important; }
+  .config-details-panel .price-tag { font-size: 1.3rem !important; }
 
   /* Adjust color pills groupings to stack nicely */
   #perf-colour > div > div:nth-child(3), 
@@ -725,19 +769,4 @@ button {
     opacity: 0 !important;
     transform: translateX(30px) scale(0.95) !important;
     pointer-events: none;
-}
-
-/* Adjustments for mobile view */
-@media screen and (max-width: 768px) {
-    .config-details-panel {
-        bottom: 5%;
-        top: auto;
-        right: 5%;
-        padding: 15px;
-        text-align: center;
-        width: 90%;
-    }
-    .config-details-panel h3 { font-size: 1.5rem; }
-    .config-details-panel p { font-size: 0.9rem; }
-    .config-details-panel .price-tag { font-size: 1.2rem; }
 }
