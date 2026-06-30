@@ -132,12 +132,27 @@ button {
 }
 
 .home-slide.active img {
-  animation: floatScooter 5s infinite ease-in-out;
+  animation: floatScooter 5s infinite ease-in-out, scooterEntrance 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.home-slide.active .neon-box {
+  animation: slideInfoEntrance 0.7s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes floatScooter {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-12px); }
+}
+
+@keyframes scooterEntrance {
+  0% { opacity: 0; transform: translateY(20px) scale(0.92); filter: drop-shadow(0 20px 30px rgba(0,0,0,0)) blur(6px); }
+  60% { filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5)) blur(0); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideInfoEntrance {
+  0% { opacity: 0; transform: translateX(-25px); }
+  100% { opacity: 1; transform: translateX(0); }
 }
 
 .neon-box {
@@ -453,13 +468,99 @@ button {
 }
 
 #riztaConfigImage {
-  /* Ensure smooth transitioning of scale and opacity to prevent glitching */
   transition: transform 0.4s ease, max-width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease !important;
 }
 
+/* =========================================================
+   COLOUR CONFIGURATOR "STAGE" BOXING
+   A proper, attractive frame around the centre vehicle image
+   ========================================================= */
+
+#perfConfigWrapper,
+#riztaConfigWrapper {
+  border-radius: 28px;
+}
+
+/* Enhance the SAME existing banner element (no duplicate overlapping box) */
+#perfColorBanner,
+#riztaColorBanner {
+  box-shadow: 0 25px 70px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.08), inset 0 0 40px rgba(255,255,255,0.04);
+  overflow: hidden;
+  animation: bannerGlow 4.5s ease-in-out infinite;
+}
+
+#perfColorBanner::after,
+#riztaColorBanner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.08) 48%, rgba(255,255,255,0.16) 50%, rgba(255,255,255,0.08) 52%, transparent 70%);
+  background-size: 250% 250%;
+  background-position: -120% 0;
+  animation: bannerShimmer 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+#perfConfigWrapper:hover #perfColorBanner,
+#riztaConfigWrapper:hover #riztaColorBanner {
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(0, 226, 150, 0.35), inset 0 0 50px rgba(0, 226, 150, 0.08);
+}
+
+@keyframes bannerGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.06); }
+}
+
+@keyframes bannerShimmer {
+  0% { background-position: -120% 0; }
+  45%, 100% { background-position: 120% 0; }
+}
+
+#perfConfigImage,
+#riztaConfigImage {
+  animation: stageImageIdle 6s ease-in-out infinite;
+}
+
+#perfConfigImage.config-img-enter,
+#riztaConfigImage.config-img-enter {
+  animation: configImageEnter 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+@keyframes configImageEnter {
+  0% { opacity: 0.2; transform: scale(0.85) rotate(-2deg); filter: brightness(1.4); }
+  60% { opacity: 1; transform: scale(1.04) rotate(0.5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: brightness(1); }
+}
+
+@keyframes stageImageIdle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+#perfConfigImage.boom-active,
 #riztaConfigImage.boom-active {
-  /* Dynamically restricts main image width when booming to nest perfectly between galleries */
-  max-width: 55% !important; 
+  animation: none;
+}
+
+/* =========================================================
+   BEAUTIFUL "BOOM" ACTIVE CARD STYLING (DESKTOP)
+   Transforms the flat image into a premium UI card component
+   ========================================================= */
+
+#perfConfigImage.boom-active,
+#riztaConfigImage.boom-active {
+    max-width: 48% !important; 
+    border-radius: 20px !important; /* Softens sharp corners */
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1) !important; /* Premium depth */
+    object-fit: cover !important; /* Ensures the image fills the card beautifully without distortion */
+    transform: scale(1.02) !important; /* Slight pop effect */
+    z-index: 20 !important;
+}
+
+/* Add a beautiful drop-shadow to the main scooters so they aren't flat */
+#perfConfigImage:not(.boom-active),
+#riztaConfigImage:not(.boom-active) {
+    filter: drop-shadow(0 30px 40px rgba(0,0,0,0.6));
 }
 
 /* --- BOOM INTERACTION CSS --- */
@@ -476,8 +577,6 @@ button {
   opacity: 0;
   pointer-events: none;
   transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* CRITICAL FIX: Z-index set very high to stay above the main scooter image */
   z-index: 15; 
 }
 
@@ -492,14 +591,14 @@ button {
 }
 
 .floating-images-container.boom.left {
-  left: 8%; /* Adjusted to stay inside the background banner */
+  left: 8%;
   transform: translateX(0) scale(1);
   opacity: 1;
   pointer-events: auto;
 }
 
 .floating-images-container.boom.right {
-  right: 8%; /* Adjusted to stay inside the background banner */
+  right: 8%;
   transform: translateX(0) scale(1);
   opacity: 1;
   pointer-events: auto;
@@ -514,6 +613,14 @@ button {
   cursor: pointer;
   border: 2px solid rgba(255,255,255,0.3);
   transition: transform 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  animation: floatingImagePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes floatingImagePop {
+  0% { opacity: 0; transform: scale(0.5) translateY(10px); }
+  70% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .floating-image:hover {
@@ -521,16 +628,15 @@ button {
   border-color: #00E296;
   z-index: 20;
   position: relative;
+  box-shadow: 0 8px 22px rgba(0, 226, 150, 0.35);
 }
 
 .hidden-floating {
   display: none !important;
 }
 
-
 /* =========================================================
    RESPONSIVE DESIGN (TABLETS & MOBILE)
-   Overrides inline HTML and original CSS logic dynamically
    ========================================================= */
 
 /* --- TABLETS (Up to 1024px) --- */
@@ -568,7 +674,7 @@ button {
   .nav-links { flex-wrap: wrap; gap: 15px !important; }
   .nav-item { font-size: 0.85rem; }
   
-  /* Sub Navbars - enable horizontal scrolling on mobile */
+  /* Sub Navbars */
   .rizta-sub-navbar { flex-direction: column; padding: 15px !important; gap: 15px; }
   .rizta-sub-navbar > div { width: 100%; overflow-x: auto; padding-bottom: 10px; justify-content: flex-start !important; }
   .rizta-sub-navbar > div::-webkit-scrollbar { height: 4px; }
@@ -578,58 +684,73 @@ button {
   #perf-video-container, .rizta-video-container { height: 35vh !important; min-height: 250px !important; border-radius: 10px !important; }
   .gallery-slider-container { height: 300px !important; }
 
-  /* Feature Grid forced to single column */
+  /* Feature Grid */
   .grid-container { grid-template-columns: 1fr !important; gap: 20px !important; }
 
-  /* Spec Strip completely stacked */
+  /* Spec Strip */
   .spec-strip { grid-template-columns: 1fr; padding: 20px 0; gap: 20px; text-align: center; }
   .spec-item { border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
   .spec-item:last-child { border-bottom: none; padding-bottom: 0; }
   .spec-item h3 { font-size: 2.2rem; }
 
-  /* Configurator and Boom Interaction Layout - FIX FOR OVERLAPPING */
+  /* Configurator and Boom Interaction Layout */
   #perfConfigWrapper, #riztaConfigWrapper { 
-      height: 480px !important; 
+      height: 420px !important; 
       margin-bottom: 20px !important;
+      display: flex !important;
+      justify-content: center !important;
+      align-items: center !important;
+      position: relative !important;
   }
   
   #perfConfigImage, #riztaConfigImage {
-      max-height: 220px !important;
+      max-height: 200px !important;
+      max-width: 80% !important;
       height: auto !important;
-      margin-top: 10px !important;
+      margin: 0 auto !important;
+      transition: all 0.4s ease !important;
   }
   
   #perfBannerText, #riztaBannerText { 
       font-size: 1.6rem !important; 
-      top: 20px !important; 
+      top: 15px !important; 
       left: 0 !important; 
       width: 100% !important; 
       text-align: center !important; 
       max-width: none !important; 
   }
   
-  /* Shift boom images to avoid completely blocking the scooter on small screens */
-  .floating-images-container.boom.left { left: 1% !important; }
-  .floating-images-container.boom.right { right: 1% !important; }
+  /* Shift boom images */
+  .floating-images-container.boom.left { left: 2% !important; }
+  .floating-images-container.boom.right { right: 2% !important; }
   
   .floating-images-container.boom {
-      padding: 8px !important;
-      max-height: 70% !important;
+      padding: 6px !important;
+      max-height: 75% !important;
+      width: 75px !important; 
+      z-index: 30 !important;
   }
   
   .floating-image { 
-      width: 60px !important; 
-      height: 40px !important; 
-      border-radius: 5px !important; 
-      margin-bottom: 5px !important;
+      width: 100% !important; 
+      height: 45px !important; 
+      border-radius: 4px !important; 
+      margin-bottom: 6px !important;
   }
   
+  /* BEAUTIFUL "BOOM" ACTIVE CARD STYLING (MOBILE) */
   #perfConfigImage.boom-active,
   #riztaConfigImage.boom-active {
-      max-width: 38% !important;
+      max-width: 45% !important;
+      max-height: 140px !important;
+      margin: 0 auto !important;
+      transform: scale(1) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.1) !important;
+      object-fit: cover !important;
   }
 
-  /* Override for config-details-panel in max-width: 768px */
+  /* Override for config-details-panel */
   .config-details-panel {
       bottom: 15px !important;
       top: auto !important;
@@ -649,7 +770,7 @@ button {
   .config-details-panel p { font-size: 0.95rem !important; margin-bottom: 10px !important; }
   .config-details-panel .price-tag { font-size: 1.3rem !important; }
 
-  /* Adjust color pills groupings to stack nicely */
+  /* Adjust color pills groupings */
   #perf-colour > div > div:nth-child(3), 
   #colour > div > div:nth-child(3) { 
     flex-wrap: wrap; 
@@ -658,7 +779,7 @@ button {
   }
   .color-pill { width: 30px !important; height: 30px !important; }
 
-  /* Comparisons Table Scroll Fix */
+  /* Comparisons Table */
   .comparison-box { padding: 20px !important; }
   .comparison-box h2 { font-size: 1.8rem !important; }
   table th, table td { padding: 10px !important; font-size: 0.9rem !important; }
@@ -671,35 +792,31 @@ button {
   .neon-btn { padding: 10px 20px; font-size: 0.8rem; }
   .home-slide img { width: 90%; }
 }
+
 /* =========================================
-   FIX FOR OVERLAPPING THUMBNAILS (450/APEX)
+   FIX FOR OVERLAPPING THUMBNAILS (450/APEX) - DESKTOP/DEFAULT
    ========================================= */
 
-/* 1. Create a styled box panel for the thumbnails */
 .floating-images-container.boom {
-    background: rgba(10, 15, 20, 0.85); /* Dark semi-transparent background */
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Subtle border */
+    background: rgba(10, 15, 20, 0.85); 
+    border: 1px solid rgba(255, 255, 255, 0.15); 
     padding: 15px 12px;
     border-radius: 16px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
-    
-    /* Center it vertically and prevent it from stretching too tall */
     height: auto;
     max-height: 85%;
     top: 50%;
     transform: translateY(-50%) scale(1) !important;
     width: auto !important; 
     z-index: 30;
-    overflow-y: auto; /* Allows scrolling inside the box if there are too many images */
+    overflow-y: auto; 
 }
 
-/* Hide the scrollbar inside the new box for a cleaner look */
 .floating-images-container.boom::-webkit-scrollbar {
     width: 0px;
 }
 
-/* 2. Position the boxes nicely on the left and right edges */
 .floating-images-container.boom.left {
     left: 5% !important;
 }
@@ -707,17 +824,10 @@ button {
     right: 5% !important;
 }
 
-/* 3. Minimize the thumbnail images (This overrides your JS and HTML inline styles) */
 .floating-image {
     width: 85px !important;
     height: 60px !important;
-    margin-bottom: 5px; /* Adds a little breathing room between thumbnails */
-}
-
-/* 4. Shrink the main center image when the panels are open so they don't touch */
-#perfConfigImage.boom-active,
-#riztaConfigImage.boom-active {
-    max-width: 48% !important;
+    margin-bottom: 5px; 
 }
 
 /* =========================================
@@ -757,14 +867,13 @@ button {
 .config-details-panel .price-tag {
     font-size: 1.4rem;
     font-weight: 800;
-    color: #00E296; /* Performance Default */
+    color: #00E296; 
 }
 
 #riztaConfigDetails .price-tag {
-    color: #00d2ff; /* Rizta Default */
+    color: #00d2ff; 
 }
 
-/* Class added by JS to hide the details when image is clicked */
 .config-details-panel.hidden-details {
     opacity: 0 !important;
     transform: translateX(30px) scale(0.95) !important;

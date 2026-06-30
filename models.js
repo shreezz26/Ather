@@ -367,12 +367,12 @@ if(domRefs.riztaConfigImage) {
                 finalBoomAssets.push('images/rizta-assets/grey-mono-frontview.png');
             } else if (isYellowDuo) {
                 finalBoomAssets = boomAssets.map(src => {
-                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'rizta-z-yellow1.avif');
-                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'rizta-z-yellow2.avif');
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'rizta-z-yellow1.jpg');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'rizta-z-yellow2.jpg');
                     return src;
                 }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
                 
-                finalBoomAssets.push('images/rizta-assets/rizta-z-yellow3.avif');
+                finalBoomAssets.push('images/rizta-assets/rizta-z-yellow3.jpg');
             } else if (isGreenDuo) {
                 finalBoomAssets = boomAssets.map(src => {
                     if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'greenduo1.png');
@@ -395,13 +395,19 @@ if(domRefs.riztaConfigImage) {
                 const img = document.createElement('img');
                 img.src = src; 
                 img.className = 'floating-image';
+                const isLeft = idx < Math.ceil(finalBoomAssets.length / 2);
+                img.classList.add(isLeft ? 'anim-left' : 'anim-right');
+                img.style.animationDelay = `${(idx % Math.ceil(finalBoomAssets.length / 2)) * 55}ms`;
                 
                 img.onclick = (e) => {
                     e.stopPropagation();
                     const tempSrc = domRefs.riztaConfigImage.src;
                     domRefs.riztaConfigImage.src = img.src; img.src = tempSrc;
+                    domRefs.riztaConfigImage.classList.remove('config-img-enter');
+                    void domRefs.riztaConfigImage.offsetWidth;
+                    domRefs.riztaConfigImage.classList.add('config-img-enter');
                 };
-                if (idx < Math.ceil(finalBoomAssets.length / 2)) domRefs.leftFloating.appendChild(img);
+                if (isLeft) domRefs.leftFloating.appendChild(img);
                 else domRefs.rightFloating.appendChild(img);
             });
             domRefs.leftFloating.classList.remove('hidden-floating');
@@ -465,6 +471,9 @@ if(domRefs.perfConfigImage) {
                 const img = document.createElement('img');
                 img.src = src; 
                 img.className = 'floating-image';
+                const isLeft = idx < Math.ceil(assetsToUse.length / 2);
+                img.classList.add(isLeft ? 'anim-left' : 'anim-right');
+                img.style.animationDelay = `${(idx % Math.ceil(assetsToUse.length / 2)) * 55}ms`;
 
                 img.style.width = '110px';
                 img.style.height = '75px';
@@ -474,7 +483,7 @@ if(domRefs.perfConfigImage) {
                 img.style.border = '2px solid rgba(255,255,255,0.15)';
                 img.style.backgroundColor = 'rgba(0,0,0,0.6)';
                 img.style.cursor = 'pointer';
-                img.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                img.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s';
                 
                 img.onmouseover = () => {
                     img.style.transform = 'scale(1.15)';
@@ -493,12 +502,15 @@ if(domRefs.perfConfigImage) {
                     e.stopPropagation();
                     const tempSrc = domRefs.perfConfigImage.src;
                     domRefs.perfConfigImage.src = img.src; img.src = tempSrc;
+                    domRefs.perfConfigImage.classList.remove('config-img-enter');
+                    void domRefs.perfConfigImage.offsetWidth;
+                    domRefs.perfConfigImage.classList.add('config-img-enter');
                     
                     if (isCurrentlyApex) {
                         domRefs.perfConfigImage.style.mixBlendMode = 'normal';
                     }
                 };
-                if (idx < Math.ceil(assetsToUse.length / 2)) domRefs.perfLeftFloating.appendChild(img);
+                if (isLeft) domRefs.perfLeftFloating.appendChild(img);
                 else domRefs.perfRightFloating.appendChild(img);
             });
             domRefs.perfLeftFloating.classList.remove('hidden-floating');
@@ -560,7 +572,12 @@ function initColorPickers() {
                     domRefs.riztaConfigImage.style.opacity = '1';
                     domRefs.riztaBannerText.style.opacity = '1';
                     domRefs.riztaBannerText.style.transform = 'scale(1)';
-                    domRefs.riztaConfigImage.style.cursor = 'pointer'; 
+                    domRefs.riztaConfigImage.style.cursor = 'pointer';
+
+                    // Re-trigger entrance animation
+                    domRefs.riztaConfigImage.classList.remove('config-img-enter');
+                    void domRefs.riztaConfigImage.offsetWidth; // reflow
+                    domRefs.riztaConfigImage.classList.add('config-img-enter');
                     
                     applyRiztaSWhiteOverrides();
                 }, 200);
@@ -622,6 +639,11 @@ function initColorPickers() {
                     domRefs.perfBannerText.style.opacity = '1';
                     domRefs.perfBannerText.style.transform = 'scale(1)';
                     domRefs.perfConfigImage.style.cursor = 'pointer';
+
+                    // Re-trigger entrance animation
+                    domRefs.perfConfigImage.classList.remove('config-img-enter');
+                    void domRefs.perfConfigImage.offsetWidth; // reflow
+                    domRefs.perfConfigImage.classList.add('config-img-enter');
                     
                     if(color.category === 'apex') {
                         domRefs.perfConfigImage.style.mixBlendMode = 'normal';
@@ -698,6 +720,18 @@ function renderTemplate() {
     if (domRefs.pageTitle) domRefs.pageTitle.textContent = `Ather Select | ${model.name}`;
 
     if (selectedModel.startsWith('rizta')) {
+        // Animate Rizta hero image
+        const riztaHeroImg = document.getElementById('riztaHeroImage');
+        if (riztaHeroImg) {
+            const clone = riztaHeroImg.cloneNode(true);
+            riztaHeroImg.parentNode.replaceChild(clone, riztaHeroImg);
+            const freshHero = document.getElementById('riztaHeroImage');
+            freshHero.classList.add('rizta-hero-glow');
+            let shadow = freshHero.parentNode.querySelector('.hero-ground-shadow');
+            if (!shadow) { shadow = document.createElement('div'); shadow.className = 'hero-ground-shadow'; freshHero.parentNode.appendChild(shadow); }
+            shadow.className = 'hero-ground-shadow';
+        }
+
         if (domRefs.riztaHeroTitle) domRefs.riztaHeroTitle.textContent = `Meet ${model.name}`;
         if (domRefs.riztaHeroSubtitle) domRefs.riztaHeroSubtitle.textContent = model.subtitle;
         if (domRefs.riztaHeroPrice) domRefs.riztaHeroPrice.textContent = `Starts at ${model.price}`;
@@ -732,6 +766,28 @@ function renderTemplate() {
         applyRiztaSWhiteOverrides();
 
     } else {
+        // Apply hero image animation class based on model type
+        const heroImg = document.getElementById('heroImage');
+        if (heroImg) {
+            heroImg.classList.remove('perf-hero-glow', 'apex-hero-glow', 'rizta-hero-glow');
+            // Re-trigger by cloning to reset animation
+            const clone = heroImg.cloneNode(true);
+            heroImg.parentNode.replaceChild(clone, heroImg);
+            const freshHero = document.getElementById('heroImage');
+            if (selectedModel === 'apex') {
+                freshHero.classList.add('apex-hero-glow');
+                // Inject / update ground shadow
+                let shadow = freshHero.parentNode.querySelector('.hero-ground-shadow');
+                if (!shadow) { shadow = document.createElement('div'); shadow.className = 'hero-ground-shadow apex'; freshHero.parentNode.appendChild(shadow); }
+                shadow.className = 'hero-ground-shadow apex';
+            } else {
+                freshHero.classList.add('perf-hero-glow');
+                let shadow = freshHero.parentNode.querySelector('.hero-ground-shadow');
+                if (!shadow) { shadow = document.createElement('div'); shadow.className = 'hero-ground-shadow'; freshHero.parentNode.appendChild(shadow); }
+                shadow.className = 'hero-ground-shadow';
+            }
+        }
+
         if (domRefs.perfHeroTitle) domRefs.perfHeroTitle.textContent = `Meet ${model.name}`;
         if (domRefs.heroSubtitle) domRefs.heroSubtitle.textContent = model.subtitle;
         if (domRefs.heroPrice) domRefs.heroPrice.textContent = `Starts at ${model.price}`;
