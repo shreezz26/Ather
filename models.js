@@ -50,7 +50,7 @@ const atherModels = {
       name: '450 Apex', subtitle: 'The Pinnacle of Speed', price: '₹ 1.91 Lakh', 
       specs: { accel: '2.9 SECS', speed: '100 KMPH', torque: '26 NM', range: '157 KM*' }, 
       views: { 
-          exterior: 'images/apex-assets/apex-model.jpeg', 
+          exterior: 'images/apex-assets/apex-main.webp', 
           dashboard: [
               'images/apex-assets/Ather-450-Apex-Call-Music-Control.webp',
               'images/apex-assets/Ather-450-Apex-Google-Maps-Platform.webp',
@@ -90,7 +90,7 @@ const perfColors = [
     { category: 'series', name: 'Stealth Blue', hex: '#1C2938', bg: '#0A0F14', src: 'images/450-assets/Ather-450-colours-Stealth-Blue.webp' },
     { category: 'series', name: 'Still White', hex: '#F2F2F2', bg: '#1A1A1A', src: 'images/450-assets/Ather-450-colours-Still-White.webp' },
     { category: 'series', name: 'True Red', hex: '#B21E23', bg: '#1A0505', src: 'images/450-assets/Ather-450-colours-True-Red.webp' },
-    { category: 'apex', name: 'Indium Blue', hex: 'linear-gradient(135deg, #0B1B2B 50%, #FF6600 50%)', bg: '#050a14', src: 'images/apex-assets/apex-model.jpeg' }
+    { category: 'apex', name: 'Indium Blue', hex: 'linear-gradient(135deg, #0B1B2B 50%, #FF6600 50%)', bg: '#050a14', src: 'images/apex-assets/apex-main.webp' }
 ];
 
 /* --- INTERACTIVE BOOM ASSETS --- */
@@ -236,6 +236,40 @@ function stopAllSliders() {
     if(dashboardInterval) clearInterval(dashboardInterval); 
 }
 
+// --- NEW FUNCTION: Dynamically override gallery assets for Pristine White Rizta S ---
+function applyRiztaSWhiteOverrides() {
+    const activeBannerText = domRefs.riztaBannerText ? domRefs.riztaBannerText.textContent : '';
+    const isRiztaSWhite = (selectedModel === 'rizta-s' && activeBannerText === 'Pristine White');
+    const galleryImg1 = document.querySelector('#riztaGallerySlider img[alt="Gallery 1"]');
+    const galleryImg4 = document.querySelector('#riztaGallerySlider img[alt="Gallery 4"]');
+    
+    // Override Image 1 (Headlight)
+    if (galleryImg1) {
+        if (isRiztaSWhite) {
+            if (galleryImg1.src.includes('Ather-Rizta-Electric-Scooter-Headlight.webp')) {
+                galleryImg1.src = galleryImg1.src.replace('Ather-Rizta-Electric-Scooter-Headlight.webp', 'rizta-s-white4.avif');
+            }
+        } else {
+            if (galleryImg1.src.includes('rizta-s-white4.avif')) {
+                galleryImg1.src = galleryImg1.src.replace('rizta-s-white4.avif', 'Ather-Rizta-Electric-Scooter-Headlight.webp');
+            }
+        }
+    }
+
+    // Override Image 4 (Replacing Terracotta with White 3 in Gallery for Pristine White)
+    if (galleryImg4) {
+        if (isRiztaSWhite) {
+            if (galleryImg4.src.includes('Rizta-Terracotta-Mono-Duo.webp')) {
+                galleryImg4.src = galleryImg4.src.replace('Rizta-Terracotta-Mono-Duo.webp', 'rizta-s-white3.avif');
+            }
+        } else {
+            if (galleryImg4.src.includes('rizta-s-white3.avif')) {
+                galleryImg4.src = galleryImg4.src.replace('rizta-s-white3.avif', 'Rizta-Terracotta-Mono-Duo.webp');
+            }
+        }
+    }
+}
+
 function resetBoomState() {
     if(!isBoomActive || !domRefs.riztaConfigImage) return;
     isBoomActive = false;
@@ -278,7 +312,85 @@ if(domRefs.riztaConfigImage) {
                 domRefs.riztaBannerText.style.transform = 'scale(0.9)';
             }
 
-            boomAssets.forEach((src, idx) => {
+            const activeBannerText = domRefs.riztaBannerText ? domRefs.riztaBannerText.textContent : '';
+            const isRiztaSWhite = (selectedModel === 'rizta-s' && activeBannerText === 'Pristine White');
+            const isMatteTerracotta = (activeBannerText === 'Terracotta Red'); 
+            const isStealthBlueDuo = (activeBannerText === 'Stealth Blue Duo');
+            const isStealthBlueMono = (activeBannerText === 'Stealth Blue');
+            const isGreyMono = (activeBannerText === 'Grey Mono');
+            const isYellowDuo = (activeBannerText === 'Yellow Duo');
+            const isGreenDuo = (activeBannerText === 'Green Duo');
+            const isGreyDuo = (activeBannerText === 'Grey Duo');
+            
+            // Apply dynamic overrides based on model and color
+            let finalBoomAssets = [...boomAssets];
+            if (isRiztaSWhite) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'rizta-s-white2.avif');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'rizta-s-white3.avif');
+                    return src;
+                });
+                
+                finalBoomAssets.push('images/rizta-assets/rizta-s-white4.avif');
+            } else if (isMatteTerracotta) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'terracotta-red-back.png');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'terracotta-red-front.png');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/terracotta-red-frontview.png');
+            } else if (isStealthBlueDuo) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'stealthblue-duo1.png');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'stealthblue-duo2.png');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/stealthblue-duo3.png');
+            } else if (isStealthBlueMono) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'Stealth-Blue-back.png');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'Stealth-Blue-front.png');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/Stealth-Blue-frontview.png');
+            } else if (isGreyMono) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'grey-mono-back.png');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'grey-mono-front.png');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/grey-mono-frontview.png');
+            } else if (isYellowDuo) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'rizta-z-yellow1.avif');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'rizta-z-yellow2.avif');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/rizta-z-yellow3.avif');
+            } else if (isGreenDuo) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'greenduo1.png');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'greenduo2.png');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/greenduo3.png');
+            } else if (isGreyDuo) {
+                finalBoomAssets = boomAssets.map(src => {
+                    if (src.includes('ather-detail-duo-red.avif')) return src.replace('ather-detail-duo-red.avif', 'greyduo1.png');
+                    if (src.includes('ather-footrest-red-duo.avif')) return src.replace('ather-footrest-red-duo.avif', 'greyduo2.png');
+                    return src;
+                }).filter(src => !src.toLowerCase().includes('ather-rizta-electric-scooter-headlight')); 
+                
+                finalBoomAssets.push('images/rizta-assets/greyduo3.png');
+            }
+
+            finalBoomAssets.forEach((src, idx) => {
                 const img = document.createElement('img');
                 img.src = src; 
                 img.className = 'floating-image';
@@ -288,7 +400,7 @@ if(domRefs.riztaConfigImage) {
                     const tempSrc = domRefs.riztaConfigImage.src;
                     domRefs.riztaConfigImage.src = img.src; img.src = tempSrc;
                 };
-                if (idx < Math.ceil(boomAssets.length / 2)) domRefs.leftFloating.appendChild(img);
+                if (idx < Math.ceil(finalBoomAssets.length / 2)) domRefs.leftFloating.appendChild(img);
                 else domRefs.rightFloating.appendChild(img);
             });
             domRefs.leftFloating.classList.remove('hidden-floating');
@@ -373,7 +485,7 @@ if(domRefs.perfConfigImage) {
                 };
 
                 if (isCurrentlyApex) {
-                    img.style.mixBlendMode = 'lighten';
+                    img.style.mixBlendMode = 'normal';
                 }
 
                 img.onclick = (e) => {
@@ -382,7 +494,7 @@ if(domRefs.perfConfigImage) {
                     domRefs.perfConfigImage.src = img.src; img.src = tempSrc;
                     
                     if (isCurrentlyApex) {
-                        domRefs.perfConfigImage.style.mixBlendMode = 'lighten';
+                        domRefs.perfConfigImage.style.mixBlendMode = 'normal';
                     }
                 };
                 if (idx < Math.ceil(assetsToUse.length / 2)) domRefs.perfLeftFloating.appendChild(img);
@@ -448,6 +560,8 @@ function initColorPickers() {
                     domRefs.riztaBannerText.style.opacity = '1';
                     domRefs.riztaBannerText.style.transform = 'scale(1)';
                     domRefs.riztaConfigImage.style.cursor = 'pointer'; 
+                    
+                    applyRiztaSWhiteOverrides();
                 }, 200);
             };
             
@@ -509,7 +623,7 @@ function initColorPickers() {
                     domRefs.perfConfigImage.style.cursor = 'pointer';
                     
                     if(color.category === 'apex') {
-                        domRefs.perfConfigImage.style.mixBlendMode = 'lighten';
+                        domRefs.perfConfigImage.style.mixBlendMode = 'normal';
                         if(domRefs.perfDetailPrice) domRefs.perfDetailPrice.style.color = '#FF6600';
                     } else {
                         domRefs.perfConfigImage.style.mixBlendMode = 'normal';
@@ -612,6 +726,9 @@ function renderTemplate() {
                 duoPillsContainer.parentElement.style.display = 'flex';
             }
         }
+        
+        // Dynamically evaluate and apply overrides
+        applyRiztaSWhiteOverrides();
 
     } else {
         if (domRefs.perfHeroTitle) domRefs.perfHeroTitle.textContent = `Meet ${model.name}`;
